@@ -1,0 +1,364 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2B19B3FE1FA8D22C00F21051 /* AddEditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19B3FD1FA8D22C00F21051 /* AddEditTableViewController.swift */; };
+		2B9CE1461FA89068001B1E7C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9CE1451FA89068001B1E7C /* AppDelegate.swift */; };
+		2B9CE1481FA89069001B1E7C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9CE1471FA89069001B1E7C /* ViewController.swift */; };
+		2B9CE14B1FA89069001B1E7C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B9CE1491FA89069001B1E7C /* Main.storyboard */; };
+		2B9CE14E1FA89069001B1E7C /* DiscountCard_2_0.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2B9CE14C1FA89069001B1E7C /* DiscountCard_2_0.xcdatamodeld */; };
+		2B9CE1501FA89069001B1E7C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B9CE14F1FA89069001B1E7C /* Assets.xcassets */; };
+		2B9CE1531FA89069001B1E7C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B9CE1511FA89069001B1E7C /* LaunchScreen.storyboard */; };
+		2B9CE15B1FA8A058001B1E7C /* CardTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9CE15A1FA8A058001B1E7C /* CardTableCell.swift */; };
+		2B9CE15F1FA8B70D001B1E7C /* CardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9CE15E1FA8B70D001B1E7C /* CardManager.swift */; };
+		2BC5404E1FA9D7F60095649F /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC5404C1FA9D7F60095649F /* Card.swift */; };
+		2BDF81051FAB6A620057755D /* button extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDF81041FAB6A620057755D /* button extension.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2B19B3FD1FA8D22C00F21051 /* AddEditTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditTableViewController.swift; sourceTree = "<group>"; };
+		2B9CE1421FA89068001B1E7C /* DiscountCard.2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscountCard.2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B9CE1451FA89068001B1E7C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2B9CE1471FA89069001B1E7C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2B9CE14A1FA89069001B1E7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2B9CE14D1FA89069001B1E7C /* DiscountCard_2_0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DiscountCard_2_0.xcdatamodel; sourceTree = "<group>"; };
+		2B9CE14F1FA89069001B1E7C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2B9CE1521FA89069001B1E7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2B9CE1541FA89069001B1E7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2B9CE15A1FA8A058001B1E7C /* CardTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTableCell.swift; sourceTree = "<group>"; };
+		2B9CE15E1FA8B70D001B1E7C /* CardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManager.swift; sourceTree = "<group>"; };
+		2BC5404C1FA9D7F60095649F /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		2BDF81041FAB6A620057755D /* button extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "button extension.swift"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2B9CE13F1FA89068001B1E7C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2B9CE1391FA89068001B1E7C = {
+			isa = PBXGroup;
+			children = (
+				2B9CE1441FA89068001B1E7C /* DiscountCard.2.0 */,
+				2B9CE1431FA89068001B1E7C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2B9CE1431FA89068001B1E7C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2B9CE1421FA89068001B1E7C /* DiscountCard.2.0.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2B9CE1441FA89068001B1E7C /* DiscountCard.2.0 */ = {
+			isa = PBXGroup;
+			children = (
+				2BC5404C1FA9D7F60095649F /* Card.swift */,
+				2BDF81041FAB6A620057755D /* button extension.swift */,
+				2B9CE1451FA89068001B1E7C /* AppDelegate.swift */,
+				2B9CE15A1FA8A058001B1E7C /* CardTableCell.swift */,
+				2B9CE15E1FA8B70D001B1E7C /* CardManager.swift */,
+				2B19B3FD1FA8D22C00F21051 /* AddEditTableViewController.swift */,
+				2B9CE1471FA89069001B1E7C /* ViewController.swift */,
+				2B9CE1491FA89069001B1E7C /* Main.storyboard */,
+				2B9CE14F1FA89069001B1E7C /* Assets.xcassets */,
+				2B9CE1511FA89069001B1E7C /* LaunchScreen.storyboard */,
+				2B9CE1541FA89069001B1E7C /* Info.plist */,
+				2B9CE14C1FA89069001B1E7C /* DiscountCard_2_0.xcdatamodeld */,
+			);
+			path = DiscountCard.2.0;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2B9CE1411FA89068001B1E7C /* DiscountCard.2.0 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2B9CE1571FA89069001B1E7C /* Build configuration list for PBXNativeTarget "DiscountCard.2.0" */;
+			buildPhases = (
+				2B9CE13E1FA89068001B1E7C /* Sources */,
+				2B9CE13F1FA89068001B1E7C /* Frameworks */,
+				2B9CE1401FA89068001B1E7C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DiscountCard.2.0;
+			productName = DiscountCard.2.0;
+			productReference = 2B9CE1421FA89068001B1E7C /* DiscountCard.2.0.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2B9CE13A1FA89068001B1E7C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0900;
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = "Andrii Antoniak";
+				TargetAttributes = {
+					2B9CE1411FA89068001B1E7C = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 2B9CE13D1FA89068001B1E7C /* Build configuration list for PBXProject "DiscountCard.2.0" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2B9CE1391FA89068001B1E7C;
+			productRefGroup = 2B9CE1431FA89068001B1E7C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2B9CE1411FA89068001B1E7C /* DiscountCard.2.0 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2B9CE1401FA89068001B1E7C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2B9CE1531FA89069001B1E7C /* LaunchScreen.storyboard in Resources */,
+				2B9CE1501FA89069001B1E7C /* Assets.xcassets in Resources */,
+				2B9CE14B1FA89069001B1E7C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2B9CE13E1FA89068001B1E7C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2BC5404E1FA9D7F60095649F /* Card.swift in Sources */,
+				2B19B3FE1FA8D22C00F21051 /* AddEditTableViewController.swift in Sources */,
+				2BDF81051FAB6A620057755D /* button extension.swift in Sources */,
+				2B9CE15B1FA8A058001B1E7C /* CardTableCell.swift in Sources */,
+				2B9CE1481FA89069001B1E7C /* ViewController.swift in Sources */,
+				2B9CE1461FA89068001B1E7C /* AppDelegate.swift in Sources */,
+				2B9CE14E1FA89069001B1E7C /* DiscountCard_2_0.xcdatamodeld in Sources */,
+				2B9CE15F1FA8B70D001B1E7C /* CardManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		2B9CE1491FA89069001B1E7C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2B9CE14A1FA89069001B1E7C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2B9CE1511FA89069001B1E7C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2B9CE1521FA89069001B1E7C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2B9CE1551FA89069001B1E7C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2B9CE1561FA89069001B1E7C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2B9CE1581FA89069001B1E7C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TGWDABRE5W;
+				INFOPLIST_FILE = DiscountCard.2.0/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "AndriiAntoniak.DiscountCard-2-0";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2B9CE1591FA89069001B1E7C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TGWDABRE5W;
+				INFOPLIST_FILE = DiscountCard.2.0/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "AndriiAntoniak.DiscountCard-2-0";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2B9CE13D1FA89068001B1E7C /* Build configuration list for PBXProject "DiscountCard.2.0" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B9CE1551FA89069001B1E7C /* Debug */,
+				2B9CE1561FA89069001B1E7C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2B9CE1571FA89069001B1E7C /* Build configuration list for PBXNativeTarget "DiscountCard.2.0" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B9CE1581FA89069001B1E7C /* Debug */,
+				2B9CE1591FA89069001B1E7C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2B9CE14C1FA89069001B1E7C /* DiscountCard_2_0.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2B9CE14D1FA89069001B1E7C /* DiscountCard_2_0.xcdatamodel */,
+			);
+			currentVersion = 2B9CE14D1FA89069001B1E7C /* DiscountCard_2_0.xcdatamodel */;
+			path = DiscountCard_2_0.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 2B9CE13A1FA89068001B1E7C /* Project object */;
+}
