@@ -78,7 +78,7 @@ UINavigationControllerDelegate{
     
     //Action for button called _Create Button_
     @IBAction func buttonForCreatingBarcode(_ sender: UIButton) {
-        barcodeString.setTitle("2060040899772", for: .normal)
+        barcodeString.setTitle("0800300600", for: .normal)
         //
         barcodeImage.image = executeGeneratingBarcode(from: barcodeString.currentTitle!)
     }

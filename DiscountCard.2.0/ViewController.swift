@@ -10,26 +10,6 @@ import UIKit
 
 class ViewController: UIViewController , UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating{
     
-    func updateSearchResults(for searchController: UISearchController) {
-        print("lol")
-        if searchController.searchBar.text! == "" {
-            discountCard = cardManager.returnCard()
-            tableView.reloadData()
-            print("nil")
-        }else{
-             print("NOTnil")
-            searchCardByTitle(text: searchController.searchBar.text!)
-        }
-    }
-    
-    
-    func searchCardByTitle(text: String){
-        discountCard = filterCard.filter( { (mod)-> Bool in
-            return (mod.title?.lowercased().contains(text.lowercased()))!
-        })
-        tableView.reloadData()
-    }
-    
     
     
     var cardManager = CardManager()
@@ -52,11 +32,18 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     
     
     @IBAction func updateTableView(_ sender: Any) {
+        for filter in filterColorDictionary{
+            filter.key.backgroundColor = UIColor.white
+        }
         discountCard = cardManager.returnCard()
         searchController.searchBar.text = ""
         searchController.isActive = false
         tableView.reloadData()
-        //TODO: all properties of searching and sorting must refresh!!
+        //
+        
+        //
+    //    isSearched = true
+        //
     }
     
     let searchController = UISearchController(searchResultsController: nil)
@@ -76,41 +63,13 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         definesPresentationContext = true
         searchController.searchBar.placeholder = "Search by title"
 
-        
-        
-        
         //
-        filterCollection.append(redColorFilter)
-        filterCollection.append(orangeColorFilter)
-        filterCollection.append(yellowColorFilter)
-        filterCollection.append(greenColorFilter)
-        filterCollection.append(blueColorFilter)
-        filterCollection.append(violetColorFilter)
-        
+        fillDictionary()
     }
     
-    @IBAction func add(_ sender: UIButton) {
-        print("go add")
-        //let ccc = Card(context: CardManager.getContext())
-        let ccc = Card()
-        
-        ccc.title = "ATB"
-        ccc.backImage = nil
-        ccc.barcode = nil
-        ccc.date = Date()
-        ccc.descriptionCard = "lol"
-        ccc.filterColor = "qwe"
-        ccc.frontImage = nil
-        
-        CardManager.SaveCard()
-        
-        tableView.reloadData()
-        print("all is good")
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "fromCellToPhoto", sender: discountCard[indexPath.row])
     }
-    
-    
-    
-    
     
     
     
@@ -184,6 +143,9 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         if segue.identifier == "EditToCard"{
             let addEdit = segue.destination as! AddEditTableViewController
             addEdit.editCard = sender as? Card
+        }else if segue.identifier == "fromCellToPhoto"{
+            let scrollPhotoView = segue.destination as! CardPhotoViewController
+            scrollPhotoView.selectCard = sender as? Card
         }
     }
     
@@ -203,17 +165,70 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     @IBOutlet weak var blueColorFilter: UIButton!
     
     @IBOutlet weak var violetColorFilter: UIButton!
-    
-    var filterCollection :[UIButton] = []
-    
+
     
     @IBAction func colorFilterPressed(_ sender: UIButton) {
-        
         sender.backgroundColor = sender.backgroundColor == UIColor.white ? sender.borderColor : UIColor.white
-        
-        
-        //TODO: HERE must be FILTER !!!!!
+        filterCardByColor()
+        tableView.reloadData()
     }
+    
+    
+    //function for color filter
+    func filterCardByColor(){
+        var choosenCard :[Card] = []
+        var colorReview = false
+        for filter in filterColorDictionary{
+            if filter.key.backgroundColor != UIColor.white{
+                colorReview = true
+                choosenCard += filterCard.filter( { (this)-> Bool in
+                    return (this.filterColor!.contains(filter.value))
+                })
+                discountCard = choosenCard
+        }
+        if colorReview == false{
+            discountCard = filterCard
+            }
+        }
+   //     colorCard = discountCard
+    }
+    
+    public var filterColorDictionary :[UIButton:String] = [:]
+    func fillDictionary(){
+        filterColorDictionary[redColorFilter] = "Red"
+        filterColorDictionary[orangeColorFilter] = "Orange"
+        filterColorDictionary[yellowColorFilter] = "Yellow"
+        filterColorDictionary[greenColorFilter] = "Green"
+        filterColorDictionary[blueColorFilter] = "Blue"
+        filterColorDictionary[violetColorFilter] = "Violet"
+    }
+    
+ //   var isSearched = false
+ //   var colorCard : [Card] = []
+//    var cardForFilteringByColor : [Card] = []
+    func updateSearchResults(for searchController: UISearchController) {
+       
+        if searchController.searchBar.text! == "" {
+            discountCard = cardManager.returnCard()
+           // cardForFilteringByColor = colorCard
+            filterCardByColor()
+            tableView.reloadData()
+        }else{
+            searchCardByTitle(text: searchController.searchBar.text!)
+        }
+    }
+    
+    
+    func searchCardByTitle(text: String){
+        discountCard = filterCard.filter( { (this)-> Bool in
+            return (this.title?.lowercased().contains(text.lowercased()))!
+        })
+        tableView.reloadData()
+    }
+    
+    
+    
+    
     
     
 }//END VIEWCONTROLLER
