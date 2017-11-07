@@ -48,12 +48,8 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="uWl-wL-uZR">
-                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8k5-75-26n">
-                                <rect key="frame" x="0.0" y="120" width="375" height="503"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="myCell" rowHeight="79" id="mMA-im-7UF" customClass="CardTableCell" customModule="DiscountCard_2_0" customModuleProvider="target">
@@ -315,20 +311,17 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="uWl-wL-uZR" firstAttribute="top" secondItem="NCV-gq-1uA" secondAttribute="bottom" id="R01-bk-xpd"/>
                             <constraint firstItem="NCV-gq-1uA" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="SKW-1n-gme"/>
-                            <constraint firstItem="8k5-75-26n" firstAttribute="top" secondItem="uWl-wL-uZR" secondAttribute="bottom" id="UV0-oU-w2P"/>
                             <constraint firstItem="hAM-5B-98o" firstAttribute="height" secondItem="NCV-gq-1uA" secondAttribute="height" id="VTb-jo-Deb"/>
                             <constraint firstItem="hAM-5B-98o" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="a8M-wu-nqW"/>
                             <constraint firstItem="NCV-gq-1uA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="bC7-Wt-p67"/>
                             <constraint firstItem="NCV-gq-1uA" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="cDn-9J-mM6"/>
                             <constraint firstItem="hAM-5B-98o" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="fav-O4-hib"/>
                             <constraint firstItem="8k5-75-26n" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="iaW-n4-zPn"/>
-                            <constraint firstItem="uWl-wL-uZR" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="lHe-e4-sFQ"/>
                             <constraint firstItem="hAM-5B-98o" firstAttribute="top" secondItem="8k5-75-26n" secondAttribute="bottom" id="lLq-Dy-dE8"/>
                             <constraint firstItem="hAM-5B-98o" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="lNb-3w-8R3"/>
                             <constraint firstItem="8k5-75-26n" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="njb-dG-crX"/>
-                            <constraint firstItem="uWl-wL-uZR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="vTA-J5-XeH"/>
+                            <constraint firstItem="8k5-75-26n" firstAttribute="top" secondItem="NCV-gq-1uA" secondAttribute="top" constant="44" id="syV-eB-Cnv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

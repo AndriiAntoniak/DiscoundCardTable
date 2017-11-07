@@ -23,25 +23,23 @@ class CardManager{
     private static var context: NSManagedObjectContext {
         return persistentContainer.viewContext
     }
+    
     public static func getContext()->NSManagedObjectContext{
         return CardManager.context
     }
     
-    //MARK: WHAT IS IT ????
     static func SaveCard() {
         try? CardManager.context.save()
     }
     
     func returnCard()->[Card]{
         var discountCard : [Card] = []
-        print("before return card: \(discountCard.count)")
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Card")
         do {
             discountCard = try CardManager.context.fetch(fetchRequest) as! [Card]
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
-        print("after return card: \(discountCard.count)")
         try?  CardManager.context.save()
         return discountCard
     }
@@ -53,9 +51,33 @@ class CardManager{
     }
     
     
-    
-    
-    
+        
+        func fetchData(filter: String?) -> [Card]{
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName :"Card")
+            if filter != nil && filter != "" {
+                fetchRequest.predicate = NSPredicate(format: "filter == %@", filter!)
+                var cardArray:[Card] = []
+                do{
+                    cardArray = (try CardManager.context.fetch(Card.fetchRequest()) as? [Card])!
+                } catch {
+                    print("Error fetch")
+                }
+                return cardArray
+            } else {
+                print("LIKE NIL FILTER")
+                do {
+                    var cardArray: [Card] = []
+                    cardArray = try CardManager.context.fetch(Card.fetchRequest()) as! [Card]
+                    return cardArray
+                } catch {
+                    let cardArray: [Card] = []
+                    return cardArray
+                }
+                
+            }
+            
+            
+        }
     
     
     

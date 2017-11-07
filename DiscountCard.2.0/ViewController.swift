@@ -8,41 +8,77 @@
 
 import UIKit
 
-class ViewController: UIViewController , UITableViewDataSource, UITableViewDelegate{
+class ViewController: UIViewController , UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating{
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        print("lol")
+        if searchController.searchBar.text! == "" {
+            discountCard = cardManager.returnCard()
+            tableView.reloadData()
+            print("nil")
+        }else{
+             print("NOTnil")
+            searchCardByTitle(text: searchController.searchBar.text!)
+        }
+    }
+    
+    
+    func searchCardByTitle(text: String){
+        discountCard = filterCard.filter( { (mod)-> Bool in
+            return (mod.title?.lowercased().contains(text.lowercased()))!
+        })
+        tableView.reloadData()
+    }
     
     
     
     var cardManager = CardManager()
     
     var discountCard : [Card] = []
+     var filterCard : [Card] = []
     
     
     @IBOutlet weak var tableView: UITableView!
     
+    //MARK: SEARCH
+    @IBOutlet var searchBar: UISearchBar!
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         discountCard = cardManager.returnCard()
-        print("discountCard=\(discountCard.count)")
-        
+        filterCard = discountCard
     }
-    
     
     
     @IBAction func updateTableView(_ sender: Any) {
         discountCard = cardManager.returnCard()
+        searchController.searchBar.text = ""
+        searchController.isActive = false
         tableView.reloadData()
-        
         //TODO: all properties of searching and sorting must refresh!!
     }
     
-    
+    let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
+        //
+        
+        //
+        
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        tableView.tableHeaderView = searchController.searchBar
+        definesPresentationContext = true
+        searchController.searchBar.placeholder = "Search by title"
+
+        
+        
+        
         //
         filterCollection.append(redColorFilter)
         filterCollection.append(orangeColorFilter)
@@ -80,11 +116,13 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return discountCard.count
+        
+   return discountCard.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let card = discountCard[indexPath.row]
+        
+      let card = discountCard[indexPath.row]
         print(indexPath.row)
         let cell  = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! CardTableCell
         
@@ -118,8 +156,8 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (rowAction, indexPath) in
-            self.performSegue(withIdentifier: "EditToCard", sender: self.discountCard[indexPath.row])
-            
+           
+       self.performSegue(withIdentifier: "EditToCard", sender: self.discountCard[indexPath.row])
         }
         editAction.backgroundColor = .blue
         
@@ -130,8 +168,11 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         shareAction.backgroundColor = .green
         
         let deleteAction = UITableViewRowAction(style: .normal, title: "Delete") { (rowAction, indexPath) in
+            
+        
             self.cardManager.deleteCard(card: self.discountCard[indexPath.row])
             self.discountCard.remove(at: indexPath.row)
+ 
             tableView.reloadData()
         }
         deleteAction.backgroundColor = .red
