@@ -7,40 +7,53 @@
 //
 
 import UIKit
+import RSBarcodes_Swift
+import AVFoundation
 
 class AddEditTableViewController: UITableViewController, UIImagePickerControllerDelegate ,
 UINavigationControllerDelegate{
     
+    var boolEditValue = false
     
     private var cardMan = CardManager()
+    
     var editCard : Card?
+    
     var addCard : Card?
+    
     private var whatIsImage : String?
     
     @IBOutlet weak var frontImageOutlet: UIImageView!
     
     @IBOutlet weak var backImageOutlet: UIImageView!
     
-    
-    
-   
     @IBOutlet weak var titleFiled: UITextField!
     
     @IBOutlet weak var descriptionTextView: UITextView!
     
     @IBOutlet weak var barcodeImage: UIImageView!
     
-
+    // outlet for button called _Create Barcode_
+    @IBOutlet weak var barcodeString: UIButton!
+    
     
     //func for adding front image
     @IBAction func addFrontImage(_ sender: UIButton) {
         whatIsImage = "front"
+        if frontImageOutlet.image != nil{
+        frontImageOutlet.backgroundColor = UIColor.white
+        frontImageOutlet.alpha = 1.0
+        }
         executeAddingImage()
     }
     
     //func for adding back image
     @IBAction func addBackImage(_ sender: UIButton) {
         whatIsImage = "back"
+        if backImageOutlet.image != nil{
+            backImageOutlet.backgroundColor = UIColor.white
+            backImageOutlet.alpha = 1.0
+        }
         executeAddingImage()
     }
     
@@ -73,35 +86,47 @@ UINavigationControllerDelegate{
     }
     
     
-    // outlet for button called _Create Barcode_
-    @IBOutlet weak var barcodeString: UIButton!
+   
     
+    //TODO: ALERT DONT WORK
     //Action for button called _Create Button_
     @IBAction func buttonForCreatingBarcode(_ sender: UIButton) {
-        barcodeString.setTitle("0800300600", for: .normal)
+        var barcodeTextField : UITextField?
+        let addBarcode = UIAlertController(title: "Creating barcode", message: "Choose a way for creating barcode", preferredStyle: UIAlertControllerStyle.actionSheet)
+        
+        addBarcode.addAction(UIAlertAction(title: "Generate", style: .default, handler: {(action:UIAlertAction) in
+           let textFieldAlertController = UIAlertController(title: "Generate", message: "Please,enter barcode", preferredStyle: .alert)
+            
+            textFieldAlertController.addTextField{ (textField) in textField.text = "" }
+    
+            textFieldAlertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (alert:UIAlertAction) in
+                let textField = textFieldAlertController.textFields![0]
+                barcodeTextField?.text = textField.text
+            }))
+           
+            let alertAction = UIAlertAction(title: "Close", style: .cancel, handler: nil)
+            textFieldAlertController.addAction(alertAction)
+            
+            self.present(textFieldAlertController, animated: true, completion: nil)
+            
+        }))
+        addBarcode.addAction(UIAlertAction(title: "Scan", style: .default, handler: nil/*must be somethin g*/))
+        
+        addBarcode.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+      
+        self.present(addBarcode, animated: true, completion: nil)
+        
         //
-        barcodeImage.image = executeGeneratingBarcode(from: barcodeString.currentTitle!)
-    }
-    
-    
-    //TODO: Here must be my barcode with some alert 
-    func executeGeneratingBarcode(from string: String)-> UIImage?{
         
-        let data = string.data(using: String.Encoding.ascii)
-            
-            if let filter = CIFilter(name: "CICode128BarcodeGenerator") {
-                filter.setValue(data, forKey: "inputMessage")
-                let transform = CGAffineTransform(scaleX: 3, y: 3)
-                
-                if let output = filter.outputImage?.transformed(by: transform) {
-                    return UIImage(ciImage: output)
-                }
-            }
-            
-            return nil
+        
+        barcodeString.setTitle(barcodeTextField?.text , for: .normal)
+        
+        
+        barcodeImage.image = RSUnifiedCodeGenerator.shared.generateCode(barcodeString.currentTitle!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue)
+        //TODO: BARCODE SCAN AND SOMETHING ELSE
+ 
         
     }
-    
     
     
     //MARK: Choosing color filter, only one is possible !!!
@@ -150,31 +175,52 @@ UINavigationControllerDelegate{
     
     
     
+    //TODO: function for lighting
+    func lightUpGaps(){
+        if frontImageOutlet.image == nil{
+            frontImageOutlet.backgroundColor = UIColor.red
+            frontImageOutlet.alpha = 0.7
+        }
+        if backImageOutlet.image == nil{
+            backImageOutlet.backgroundColor = UIColor.red
+            backImageOutlet.alpha = 0.7
+        }
+        if titleFiled == nil || titleFiled.text == ""{
+            titleFiled.backgroundColor = UIColor.red
+            titleFiled.alpha = 0.7
+        }
+    }
+    
+    
+    
+    
+    // exchange backgroundcolor
+    @IBAction func textFieldDidEdit(_ sender: UITextField) {
+        titleFiled.backgroundColor = UIColor.white
+        titleFiled.alpha = 1.0
+    }
+    
+    
     
     @IBAction func SaveCardButton(_ sender: UIButton) {
-        if boolEditValue{
-            
-            
-            
-            
-            editCard?.title = titleFiled.text
-            
-            //Date is created in add
-        //    editCard?.date = Date()
-            
-            fillDictionary()
-            for filter in filterColorDictionary{
-                if filter.key.backgroundColor != UIColor.white{
-                    editCard?.filterColor = filter.value
-                    break
-                }
+        
+        if frontImageOutlet.image != nil && backImageOutlet.image != nil && titleFiled.text != ""{
+            //TODO: ALL REGUIRED IS NOT NILL THAN OKEY
+            if boolEditValue{
+                editExistCard()
+            }else{
+                addNewCard()
             }
-            //TODO: MUST BE ALL PROPERTIES
+            performSegue(withIdentifier: "EditToCardTable", sender: nil)
         }else{
-            addNewCard()
-            //TODO: MUST BE ALL PROPERTIES
+            //TODO: Function which light up your not filled gaps
+            let closeAlertAction = UIAlertController(title: "Error", message: "Please fill all required fields", preferredStyle: .actionSheet)
+            let alertAction = UIAlertAction(title: "Close", style: .cancel, handler: nil)
+            closeAlertAction.addAction(alertAction)
+            self.present(closeAlertAction, animated: true, completion: nil)
+            lightUpGaps()
+            //TODO function which light up my not filled gaps
         }
-        performSegue(withIdentifier: "EditToCardTable", sender: nil)
     }
     
     
@@ -187,7 +233,7 @@ UINavigationControllerDelegate{
         filterColorDictionary[violetColorFilter] = "Violet"
     }
     
-    var boolEditValue = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -196,37 +242,51 @@ UINavigationControllerDelegate{
             boolEditValue = true
             insertCartValueWhichMustEditing()
             
-            for filter in filterColorDictionary{
-                if filter.value == editCard?.filterColor{
-                    filter.key.backgroundColor = filter.key.borderColor
-                    break
-                }
-            }
         }
     }
     
     func insertCartValueWhichMustEditing(){
-        if barcodeImage.image != nil{
-            
-           
-            
+        if editCard?.barcode != nil{
+            barcodeString.setTitle(editCard?.barcode, for: .normal)
+            barcodeImage.image = RSUnifiedCodeGenerator.shared.generateCode(barcodeString.currentTitle!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue)
+            barcodeString.isEnabled = false
         }
-        //TODO: barcode generator but now it will be LOL
-        //TODO: PHOTO PHOTO PHOTO
-        //TODO: filter like string
-        //TODO: ALL MUST BE TODO !!!
-        
-        
         titleFiled.text = editCard?.title
+        for filter in filterColorDictionary{
+            if filter.value == editCard?.filterColor{
+                filter.key.backgroundColor = filter.key.borderColor
+                break
+            }
+        }
         
-        //        for filter in filterColorDictionary{
-        //            if filter.value == editCard?.filterColor{
-        //                filter.key.backgroundColor = filter.key.borderColor
-        //                break
-        //            }
-        //        }
+        frontImageOutlet.image = cardMan.loadImageFromPath(path: (editCard?.frontImage)!)
+        backImageOutlet.image = cardMan.loadImageFromPath(path: (editCard?.backImage)!)
+        
+        descriptionTextView.text = editCard?.descriptionCard ?? nil
+        
+        //TODO: DESCRIPTION
     }
     
+    
+    //func for editing exist card
+    func editExistCard(){
+        if barcodeString.isEnabled{
+            editCard?.barcode = barcodeString.currentTitle
+        }
+        editCard?.title = titleFiled.text
+        fillDictionary()
+        for filter in filterColorDictionary{
+            if filter.key.backgroundColor != UIColor.white{
+                editCard?.filterColor = filter.value
+                break
+            }
+        }
+        editCard?.frontImage = cardMan.addToUrl(frontImageOutlet.image!)
+        editCard?.backImage = cardMan.addToUrl(backImageOutlet.image!)
+        editCard?.descriptionCard = descriptionTextView.text
+    }
+    
+    //func for adding new card
     func addNewCard(){
         addCard = Card()
         addCard?.date = Date()
@@ -237,20 +297,10 @@ UINavigationControllerDelegate{
                 break
             }
         }
-        
-        //TODO: HERE MUST BE ALL PROPERTIES
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        addCard?.frontImage = cardMan.addToUrl(frontImageOutlet.image!)
+        addCard?.backImage = cardMan.addToUrl(backImageOutlet.image!)
+        addCard?.barcode = barcodeString.currentTitle
+        addCard?.descriptionCard = descriptionTextView.text
     }
     
     
@@ -273,7 +323,7 @@ UINavigationControllerDelegate{
     
     
     
-}
+}//End main class
 
 
 

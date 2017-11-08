@@ -79,6 +79,33 @@ class CardManager{
             
         }
     
+    //TODO: Must be my photo saver
+    
+    func addToUrl (_ photo: UIImage )  -> String {
+        let documentDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
+        let uuidStringforURL = UUID().uuidString + ".jpg"
+        let imgPath = URL(fileURLWithPath: documentDirectoryPath.appendingPathComponent(uuidStringforURL))// Change extension if you want to save as PNG
+        let imageString = String(describing: imgPath)
+        print(imageString)
+        do{
+            try UIImageJPEGRepresentation(photo, 1.0)?.write(to: imgPath, options: .atomic)
+        }catch let error{
+            print(error.localizedDescription)
+        }
+        return uuidStringforURL
+        
+    }
+    func loadImageFromPath(path: String) -> UIImage? {
+        let documentDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
+        let imageURL = URL(fileURLWithPath: documentDirectoryPath.appendingPathComponent(path))
+        do {
+            let imageData = try Data(contentsOf: imageURL)
+            return UIImage(data: imageData)
+        } catch {
+            print(error.localizedDescription)
+        }
+        return nil
+    }
     
     
     
@@ -91,5 +118,5 @@ class CardManager{
     
     
     
-}
+}//END CardManager
 

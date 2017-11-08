@@ -40,10 +40,6 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         searchController.isActive = false
         tableView.reloadData()
         //
-        
-        //
-    //    isSearched = true
-        //
     }
     
     let searchController = UISearchController(searchResultsController: nil)
@@ -87,10 +83,9 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         
         cell.cardTitle?.text = card.title
         cell.cardDate?.text = DateFormatter.localizedString(from: card.date! as Date , dateStyle: DateFormatter.Style.medium, timeStyle: DateFormatter.Style.medium)
-        cell.colorFilter?.text = card.filterColor
         cell.colorFilter?.backgroundColor = installColorForFilter(card:card)
-        cell.backImage?.image = nil
-        cell.frontImage?.image = nil
+        cell.backImage?.image = cardManager.loadImageFromPath(path:  card.backImage!)
+        cell.frontImage?.image = cardManager.loadImageFromPath(path: card.frontImage!)
         
         
         return cell
@@ -210,7 +205,6 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
        
         if searchController.searchBar.text! == "" {
             discountCard = cardManager.returnCard()
-           // cardForFilteringByColor = colorCard
             filterCardByColor()
             tableView.reloadData()
         }else{
