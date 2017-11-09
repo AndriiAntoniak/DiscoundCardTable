@@ -11,7 +11,9 @@ import RSBarcodes_Swift
 import AVFoundation
 
 class AddEditTableViewController: UITableViewController, UIImagePickerControllerDelegate ,
-UINavigationControllerDelegate{
+UINavigationControllerDelegate,ScannerResultDelegate{
+    
+    
     
     var boolEditValue = false
     
@@ -86,46 +88,48 @@ UINavigationControllerDelegate{
     }
     
     
-   
+    func returnStringBarcode(barcode str: String) {
+        self.barcodeString.setTitle(str , for: .normal)
+        self.barcodeImage.image = RSUnifiedCodeGenerator.shared.generateCode(self.barcodeString.currentTitle!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue)
+    }
     
-    //TODO: ALERT DONT WORK
     //Action for button called _Create Button_
     @IBAction func buttonForCreatingBarcode(_ sender: UIButton) {
-        var barcodeTextField : UITextField?
-        let addBarcode = UIAlertController(title: "Creating barcode", message: "Choose a way for creating barcode", preferredStyle: UIAlertControllerStyle.actionSheet)
         
+        let addBarcode = UIAlertController(title: "Creating barcode", message: "Choose a way for creating barcode", preferredStyle: UIAlertControllerStyle.actionSheet)
+
         addBarcode.addAction(UIAlertAction(title: "Generate", style: .default, handler: {(action:UIAlertAction) in
            let textFieldAlertController = UIAlertController(title: "Generate", message: "Please,enter barcode", preferredStyle: .alert)
             
             textFieldAlertController.addTextField{ (textField) in textField.text = "" }
-    
+            
             textFieldAlertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (alert:UIAlertAction) in
                 let textField = textFieldAlertController.textFields![0]
-                barcodeTextField?.text = textField.text
+                self.barcodeString.setTitle(textField.text , for: .normal)
+                self.barcodeImage.image = RSUnifiedCodeGenerator.shared.generateCode(self.barcodeString.currentTitle!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue)
             }))
            
             let alertAction = UIAlertAction(title: "Close", style: .cancel, handler: nil)
+            
             textFieldAlertController.addAction(alertAction)
             
             self.present(textFieldAlertController, animated: true, completion: nil)
-            
-        }))
-        addBarcode.addAction(UIAlertAction(title: "Scan", style: .default, handler: nil/*must be somethin g*/))
-        
-        addBarcode.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-      
-        self.present(addBarcode, animated: true, completion: nil)
-        
-        //
-        
-        
-        barcodeString.setTitle(barcodeTextField?.text , for: .normal)
-        
-        
-        barcodeImage.image = RSUnifiedCodeGenerator.shared.generateCode(barcodeString.currentTitle!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue)
-        //TODO: BARCODE SCAN AND SOMETHING ELSE
  
+        }))
         
+        addBarcode.addAction(UIAlertAction(title: "Scan", style: .default, handler: {(action:UIAlertAction) in
+            if TARGET_OS_SIMULATOR == 0{
+                self.performSegue(withIdentifier: "fromAddToScanner", sender: nil)
+            }else{
+                let closeAlertAction = UIAlertController(title: "Error", message: "Camera is not available", preferredStyle: .actionSheet)
+                let alertAction = UIAlertAction(title: "Close", style: .cancel, handler: nil)
+                closeAlertAction.addAction(alertAction)
+                self.present(closeAlertAction, animated: true, completion: nil)
+            }
+        }))
+        //TODO: SCAn
+        addBarcode.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(addBarcode, animated: true, completion: nil)
     }
     
     
