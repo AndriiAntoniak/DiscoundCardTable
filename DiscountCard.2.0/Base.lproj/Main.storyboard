@@ -344,7 +344,7 @@
                                     </barButtonItem>
                                     <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Qfb-5r-P19">
                                         <connections>
-                                            <segue destination="BYZ-38-t0r" kind="show" id="dCJ-g0-Ngp"/>
+                                            <action selector="ifCardIsCreated:" destination="AJb-1X-rb4" id="imk-yr-U0J"/>
                                         </connections>
                                     </barButtonItem>
                                 </navigationItem>
@@ -562,7 +562,7 @@
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="69K-Uk-JhZ" userLabel="Red">
                                                                     <rect key="frame" x="0.0" y="0.0" width="62.5" height="74.5"/>
-                                                                    <color key="backgroundColor" red="1" green="0.065431795060000006" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -838,7 +838,7 @@
                                         <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Cancel"/>
                                         <connections>
-                                            <segue destination="AJb-1X-rb4" kind="show" id="keS-AS-Ym8"/>
+                                            <action selector="cancelButton:" destination="ILp-Er-7ww" eventType="touchUpInside" id="IXt-hJ-il4"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -847,29 +847,20 @@
                                     <constraint firstAttribute="height" constant="50" id="vnG-QG-qKa"/>
                                 </constraints>
                             </stackView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VNs-rZ-7qx">
-                                <rect key="frame" x="0.0" y="411" width="375" height="135"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.065431795060000006" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="YWV-gf-1Bd" firstAttribute="leading" secondItem="3uX-in-6od" secondAttribute="leading" id="423-Mx-aYS"/>
-                            <constraint firstItem="VNs-rZ-7qx" firstAttribute="top" secondItem="oqi-W0-K0C" secondAttribute="bottom" id="EeP-QA-uup"/>
                             <constraint firstItem="oqi-W0-K0C" firstAttribute="centerX" secondItem="3uX-in-6od" secondAttribute="centerX" id="IW3-8T-nSk"/>
                             <constraint firstItem="oqi-W0-K0C" firstAttribute="trailing" secondItem="3uX-in-6od" secondAttribute="trailing" id="QTx-Jc-kHk"/>
                             <constraint firstItem="oqi-W0-K0C" firstAttribute="leading" secondItem="3uX-in-6od" secondAttribute="leading" id="bbs-Rj-zyi"/>
-                            <constraint firstItem="VNs-rZ-7qx" firstAttribute="trailing" secondItem="3uX-in-6od" secondAttribute="trailing" id="dvo-uk-8p6"/>
                             <constraint firstItem="oqi-W0-K0C" firstAttribute="centerY" secondItem="3uX-in-6od" secondAttribute="centerY" id="hXI-SB-WLl"/>
-                            <constraint firstItem="VNs-rZ-7qx" firstAttribute="width" secondItem="oqi-W0-K0C" secondAttribute="width" id="jVr-PK-gZP"/>
-                            <constraint firstItem="VNs-rZ-7qx" firstAttribute="leading" secondItem="3uX-in-6od" secondAttribute="leading" id="lmg-c0-qKV"/>
-                            <constraint firstItem="VNs-rZ-7qx" firstAttribute="height" secondItem="oqi-W0-K0C" secondAttribute="height" id="oSU-0M-qlE"/>
                             <constraint firstItem="YWV-gf-1Bd" firstAttribute="bottom" secondItem="3uX-in-6od" secondAttribute="bottom" id="x6w-7X-cO6"/>
                             <constraint firstItem="3uX-in-6od" firstAttribute="trailing" secondItem="YWV-gf-1Bd" secondAttribute="trailing" id="ySW-80-a7n"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3uX-in-6od"/>
                     </view>
                     <connections>
-                        <outlet property="myCropImage" destination="VNs-rZ-7qx" id="N7D-fy-gGs"/>
                         <outlet property="scrollView" destination="oqi-W0-K0C" id="MB0-wH-Qs2"/>
                         <segue destination="AJb-1X-rb4" kind="show" identifier="fromCropToAdd" id="YX1-4U-sMO"/>
                     </connections>

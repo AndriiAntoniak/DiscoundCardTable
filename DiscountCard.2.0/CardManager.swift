@@ -45,7 +45,7 @@ class CardManager{
     }
     
     
-    func deleteCard(card:Card){
+    static func deleteCard(card:Card){
         CardManager.context.delete(card)
         try? CardManager.context.save()
     }

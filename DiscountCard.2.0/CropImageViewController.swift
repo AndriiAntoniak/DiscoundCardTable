@@ -10,18 +10,19 @@ import UIKit
 
 class CropImageViewController: UIViewController, UIScrollViewDelegate{
 
-    
+    var cardCroppingImage : Card?
     var newImage : UIImage?
+    var whatIsImage : String?
+    var deleteCardIfCancelPressed : Bool?
     
     @IBOutlet weak var scrollView: UIScrollView!
     var imageView = UIImageView()
-    var image : UIImage? //TODO: here must be my photo
+    var image : UIImage?
     
     @IBAction func cropButton(_ sender: UIButton) {
         UIGraphicsBeginImageContextWithOptions(scrollView.bounds.size, true, UIScreen.main.scale)
         
         let offSet = scrollView.contentOffset
-    //    CGContext.translateBy(UIGraphicsGetCurrentContext(), -offSet.x, -offSet.y)
       
 
         
@@ -29,32 +30,40 @@ class CropImageViewController: UIViewController, UIScrollViewDelegate{
         context?.translateBy(x: -offSet.x, y: -offSet.y)
         scrollView.layer.render(in: UIGraphicsGetCurrentContext()!)
          newImage = UIGraphicsGetImageFromCurrentImageContext()
-        //TODO: save my IMAGE
-      //  UIImageWriteToSavedPhotosAlbum(newImage!, nil, nil, nil)
         UIGraphicsEndImageContext()
         performSegue(withIdentifier: "fromCropToAdd", sender: newImage)
-        myCropImage.image = newImage
     }
     
     
+   
     
     
-    @IBOutlet weak var myCropImage: UIImageView!
-    
-    /*
     @IBAction func cancelButton(_ sender: Any) {
-        print("*********************************************************************")
         performSegue(withIdentifier: "fromCropToAdd", sender: nil)
     }
-    */
     
+    var cardMan = CardManager()
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "fromCropToAdd"{
+            
             let newPhoto = segue.destination as? AddEditTableViewController
-            newPhoto?.cropImage = sender as? UIImage
+            
+            if let _ = sender as? UIImage{
+                if whatIsImage == "front"{
+                    cardCroppingImage?.frontImage = cardMan.addToUrl((sender as? UIImage)!)
+                }else{
+                    cardCroppingImage?.backImage = cardMan.addToUrl((sender as? UIImage)!)
+                }
+                newPhoto?.deleteCardIfCancelPressed = deleteCardIfCancelPressed!
+                newPhoto?.editCard = cardCroppingImage
+                
+            }else{
+                newPhoto?.deleteCardIfCancelPressed = deleteCardIfCancelPressed!
+                newPhoto?.editCard = cardCroppingImage
+            }
         }
     }
-   
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,37 +93,9 @@ class CropImageViewController: UIViewController, UIScrollViewDelegate{
          centerScrollViewContents()
         
         
-        /*
-        
-        
-        imageView.image = image
-        imageView.contentMode = UIViewContentMode.center
-        imageView.frame = CGRect(x: 0, y: 0, width: (image?.size.width)!, height: (image?.size.height)!)
-        scrollView.contentSize = (image?.size)!
-        
-        //
-        imageView.isUserInteractionEnabled = true
-        scrollView.addSubview(imageView)
-        //
-        
-        /*
-        let scrollViewFrame = scrollView.frame
-        let scaleWidth = scrollViewFrame.size.width / scrollView.contentSize.width
-        let scaleHeight = scrollViewFrame.size.height / scrollView.contentSize.height
-        let minScale = min(scaleWidth, scaleHeight)
-        */
-        
-        scrollView.minimumZoomScale = minScale
-        scrollView.maximumZoomScale = 1
-        scrollView.zoomScale = minScale
- 
- 
- */
         centerScrollViewContents()
  
-        //imageView = UIImage(named: <#T##String#>)
-        //TODO: throw here my image from image maker
-        
+   
     }
     
     
@@ -148,11 +129,7 @@ class CropImageViewController: UIViewController, UIScrollViewDelegate{
     }
     
     
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+
     
 
 }

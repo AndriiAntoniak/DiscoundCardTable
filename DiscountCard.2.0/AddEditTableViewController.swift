@@ -21,9 +21,11 @@ UINavigationControllerDelegate,ScannerResultDelegate{
     
     var editCard : Card?
     
+    var deleteCardIfCancelPressed = false
+    
     var addCard : Card?
     
-    private var whatIsImage : String?
+    public var whatIsImage : String?
     
     @IBOutlet weak var frontImageOutlet: UIImageView!
     
@@ -47,14 +49,7 @@ UINavigationControllerDelegate,ScannerResultDelegate{
         frontImageOutlet.alpha = 1.0
         }
         executeAddingImage()
-       
-        qwe()
     }
-    
-    func qwe(){
-        performSegue(withIdentifier: "fromAddToCrop", sender: frontImageOutlet.image)
-    }
-    
     
     //func for adding back image
     @IBAction func addBackImage(_ sender: UIButton) {
@@ -64,9 +59,8 @@ UINavigationControllerDelegate,ScannerResultDelegate{
             backImageOutlet.alpha = 1.0
         }
         executeAddingImage()
-        
-        performSegue(withIdentifier: "fromAddToCrop", sender: backImageOutlet.image)
     }
+    
     
     //func for image picker controller
     func executeAddingImage(){
@@ -79,7 +73,7 @@ UINavigationControllerDelegate,ScannerResultDelegate{
                 imagePickerController.sourceType = .camera
                 self.present(imagePickerController, animated: true, completion: nil)
             }else{
-                let closeAlertAction = UIAlertController(title: "Error", message: "Camera is not available", preferredStyle: .actionSheet)
+                let closeAlertAction = UIAlertController(title: "Error", message: "Camera is not available", preferredStyle: .alert)
                 let alertAction = UIAlertAction(title: "Close", style: .cancel, handler: nil)
                 closeAlertAction.addAction(alertAction)
                 self.present(closeAlertAction, animated: true, completion: nil)
@@ -94,10 +88,6 @@ UINavigationControllerDelegate,ScannerResultDelegate{
         addImage.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         self.present(addImage, animated: true, completion: nil)
-        
-        
-        
-        //
     }
     
    
@@ -109,7 +99,7 @@ UINavigationControllerDelegate,ScannerResultDelegate{
         self.barcodeImage.image = RSUnifiedCodeGenerator.shared.generateCode(self.barcodeString.currentTitle!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue)
     }
     
-    //Action for button called _Create Button_
+    //Action for button called _Create Barcode
     @IBAction func buttonForCreatingBarcode(_ sender: UIButton) {
         
         let addBarcode = UIAlertController(title: "Creating barcode", message: "Choose a way for creating barcode", preferredStyle: UIAlertControllerStyle.actionSheet)
@@ -137,20 +127,14 @@ UINavigationControllerDelegate,ScannerResultDelegate{
             if TARGET_OS_SIMULATOR == 0{
                 self.performSegue(withIdentifier: "fromAddToScanner", sender: nil)
             }else{
-                let closeAlertAction = UIAlertController(title: "Error", message: "Camera is not available", preferredStyle: .actionSheet)
+                let closeAlertAction = UIAlertController(title: "Error", message: "Camera is not available", preferredStyle: .alert)
                 let alertAction = UIAlertAction(title: "Close", style: .cancel, handler: nil)
                 closeAlertAction.addAction(alertAction)
                 self.present(closeAlertAction, animated: true, completion: nil)
             }
         }))
-        //TODO: SCAn
         addBarcode.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(addBarcode, animated: true, completion: nil)
-    
-        //
-        
-        //
-    
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -159,8 +143,19 @@ UINavigationControllerDelegate,ScannerResultDelegate{
         let scann = segue.destination as? ScannerViewController
          scann?.delegate = self
         }else if identifaer == "fromAddToCrop"{
-            let crop = segue.destination as? CropImageViewController
-            crop?.image = sender as? UIImage
+           let crop = segue.destination as? CropImageViewController
+            
+            crop?.deleteCardIfCancelPressed = deleteCardIfCancelPressed
+            
+            crop?.cardCroppingImage = sender as? Card
+            
+            crop?.whatIsImage = whatIsImage
+            
+            if whatIsImage == "front"{
+                crop?.image = frontImageOutlet.image
+            }else{
+                crop?.image = backImageOutlet.image
+            }
         }
     }
     
@@ -181,10 +176,20 @@ UINavigationControllerDelegate,ScannerResultDelegate{
     
     public var filterColorDictionary :[UIButton:String] = [:]
     
+    var userDidChooseAnyColorFilter = false
+    
     @IBAction func choosingColorFilter(_ sender: UIButton) {
+        if userDidChooseAnyColorFilter == false{
+            for filter in filterColorDictionary{
+                filter.key.backgroundColor = UIColor.white
+                filter.key.alpha = 1.0
+            }
+            userDidChooseAnyColorFilter = true
+        }
         if sender.backgroundColor == UIColor.white{
             for filter in filterColorDictionary{
                 filter.key.backgroundColor = UIColor.white
+                filter.key.alpha = 1.0
             }
             sender.backgroundColor = sender.borderColor
             //
@@ -207,7 +212,16 @@ UINavigationControllerDelegate,ScannerResultDelegate{
         }else{
             backImageOutlet.image = image
         }
-        picker.dismiss(animated: true, completion: nil)
+        picker.dismiss(animated: true, completion: {() in
+            if self.boolEditValue == false{
+                self.editCard = Card()
+                self.editCard?.date = Date()
+                self.deleteCardIfCancelPressed = true
+            }
+                self.editExistCard()
+            
+                self.performSegue(withIdentifier: "fromAddToCrop", sender: self.editCard)
+        })
     }
     
     
@@ -227,6 +241,12 @@ UINavigationControllerDelegate,ScannerResultDelegate{
             titleFiled.backgroundColor = UIColor.red
             titleFiled.alpha = 0.7
         }
+        if !userDidChooseAnyColorFilter{
+            for filter in filterColorDictionary{
+                filter.key.backgroundColor = UIColor.red
+                filter.key.alpha = 0.7
+            }
+        }
     }
     
     
@@ -242,8 +262,8 @@ UINavigationControllerDelegate,ScannerResultDelegate{
     
     @IBAction func SaveCardButton(_ sender: UIButton) {
         
-        if frontImageOutlet.image != nil && backImageOutlet.image != nil && titleFiled.text != ""{
-            //TODO: ALL REGUIRED IS NOT NILL THAN OKEY
+        if frontImageOutlet.image != nil && backImageOutlet.image != nil && titleFiled.text != "" && userDidChooseAnyColorFilter{
+            
             if boolEditValue{
                 editExistCard()
             }else{
@@ -251,13 +271,11 @@ UINavigationControllerDelegate,ScannerResultDelegate{
             }
             performSegue(withIdentifier: "EditToCardTable", sender: nil)
         }else{
-            //TODO: Function which light up your not filled gaps
-            let closeAlertAction = UIAlertController(title: "Error", message: "Please fill all required (red) fields", preferredStyle: .actionSheet)
+            let closeAlertAction = UIAlertController(title: "Error", message: "Please fill all required (red) fields or choose any color filter in the bottom", preferredStyle: .alert)
             let alertAction = UIAlertAction(title: "Close", style: .cancel, handler: nil)
             closeAlertAction.addAction(alertAction)
             self.present(closeAlertAction, animated: true, completion: nil)
             lightUpGaps()
-            //TODO function which light up my not filled gaps
         }
     }
     
@@ -271,22 +289,17 @@ UINavigationControllerDelegate,ScannerResultDelegate{
         filterColorDictionary[violetColorFilter] = "Violet"
     }
     
+
     
-    //
-    var cropImage : UIImage?
-    //
+ 
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-     
-        
         
         fillDictionary()
-        if cropImage != nil{
-            frontImageOutlet.image = cropImage
-        }
+        
         if editCard != nil{
             boolEditValue = true
             insertCartValueWhichMustEditing()
@@ -307,10 +320,13 @@ UINavigationControllerDelegate,ScannerResultDelegate{
                 break
             }
         }
-        
-        frontImageOutlet.image = cardMan.loadImageFromPath(path: (editCard?.frontImage)!)
-        backImageOutlet.image = cardMan.loadImageFromPath(path: (editCard?.backImage)!)
-        
+        if let _ = editCard?.frontImage{
+            frontImageOutlet.image = cardMan.loadImageFromPath(path: (editCard?.frontImage)!)
+        }
+        if let _ = editCard?.backImage{
+             backImageOutlet.image = cardMan.loadImageFromPath(path: (editCard?.backImage)!)
+        }
+       
         descriptionTextView.text = editCard?.descriptionCard ?? nil
      
     }
@@ -318,6 +334,7 @@ UINavigationControllerDelegate,ScannerResultDelegate{
     
     //func for editing exist card
     func editExistCard(){
+        userDidChooseAnyColorFilter = true
         if barcodeString.isEnabled{
             editCard?.barcode = barcodeString.currentTitle
         }
@@ -329,8 +346,15 @@ UINavigationControllerDelegate,ScannerResultDelegate{
                 break
             }
         }
-        editCard?.frontImage = cardMan.addToUrl(frontImageOutlet.image!)
-        editCard?.backImage = cardMan.addToUrl(backImageOutlet.image!)
+        if let _ = frontImageOutlet.image{
+            editCard?.frontImage = cardMan.addToUrl(frontImageOutlet.image!)
+        }
+        if let _ = backImageOutlet.image{
+            editCard?.backImage = cardMan.addToUrl(backImageOutlet.image!)
+        }
+        
+   //     editCard?.frontImage = cardMan.addToUrl(frontImageOutlet.image!)
+    //    editCard?.backImage = cardMan.addToUrl(backImageOutlet.image!)
         editCard?.descriptionCard = descriptionTextView.text
     }
     
@@ -366,9 +390,14 @@ UINavigationControllerDelegate,ScannerResultDelegate{
     
     
     
+
     
-    
-    
+    @IBAction func ifCardIsCreated(_ sender: UIBarButtonItem) {
+        if deleteCardIfCancelPressed == true{
+            CardManager.deleteCard(card: editCard!)
+        }
+        performSegue(withIdentifier: "EditToCardTable", sender: nil)
+    }
     
     
 }//End main class

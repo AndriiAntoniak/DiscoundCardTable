@@ -124,7 +124,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         let deleteAction = UITableViewRowAction(style: .normal, title: "Delete") { (rowAction, indexPath) in
             
         
-            self.cardManager.deleteCard(card: self.discountCard[indexPath.row])
+            CardManager.deleteCard(card: self.discountCard[indexPath.row])
             self.discountCard.remove(at: indexPath.row)
  
             tableView.reloadData()
@@ -221,7 +221,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     }
     
     
-    
+  
     
     
     
