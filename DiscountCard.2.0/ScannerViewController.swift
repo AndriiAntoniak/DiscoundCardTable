@@ -48,7 +48,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             if let object = metadataObjects[0] as? AVMetadataMachineReadableCodeObject{
                 if object.type == AVMetadataObject.ObjectType.ean13{
                     delegate?.returnStringBarcode(barcode: object.stringValue!)
-                    performSegue(withIdentifier: "fromScannerToAdd", sender: object.stringValue)
+                    performSegue(withIdentifier: "fromScannerToAdd", sender: nil)
+                    delegate?.returnStringBarcode(barcode: object.stringValue!)
                 }
             }
         }

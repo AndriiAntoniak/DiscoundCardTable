@@ -47,7 +47,14 @@ UINavigationControllerDelegate,ScannerResultDelegate{
         frontImageOutlet.alpha = 1.0
         }
         executeAddingImage()
+       
+        qwe()
     }
+    
+    func qwe(){
+        performSegue(withIdentifier: "fromAddToCrop", sender: frontImageOutlet.image)
+    }
+    
     
     //func for adding back image
     @IBAction func addBackImage(_ sender: UIButton) {
@@ -57,6 +64,8 @@ UINavigationControllerDelegate,ScannerResultDelegate{
             backImageOutlet.alpha = 1.0
         }
         executeAddingImage()
+        
+        performSegue(withIdentifier: "fromAddToCrop", sender: backImageOutlet.image)
     }
     
     //func for image picker controller
@@ -85,10 +94,17 @@ UINavigationControllerDelegate,ScannerResultDelegate{
         addImage.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         self.present(addImage, animated: true, completion: nil)
+        
+        
+        
+        //
     }
     
+   
     
     func returnStringBarcode(barcode str: String) {
+        print("-------------------------------------------------------------")
+        print("-------------------------------------------------------------")
         self.barcodeString.setTitle(str , for: .normal)
         self.barcodeImage.image = RSUnifiedCodeGenerator.shared.generateCode(self.barcodeString.currentTitle!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue)
     }
@@ -130,6 +146,22 @@ UINavigationControllerDelegate,ScannerResultDelegate{
         //TODO: SCAn
         addBarcode.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(addBarcode, animated: true, completion: nil)
+    
+        //
+        
+        //
+    
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let identifaer = segue.identifier
+        if identifaer == "fromAddToScanner"{
+        let scann = segue.destination as? ScannerViewController
+         scann?.delegate = self
+        }else if identifaer == "fromAddToCrop"{
+            let crop = segue.destination as? CropImageViewController
+            crop?.image = sender as? UIImage
+        }
     }
     
     
@@ -163,6 +195,7 @@ UINavigationControllerDelegate,ScannerResultDelegate{
     }
     
     
+    
     // MARK: Image picker controller delegate
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
@@ -176,6 +209,7 @@ UINavigationControllerDelegate,ScannerResultDelegate{
         }
         picker.dismiss(animated: true, completion: nil)
     }
+    
     
     
     
@@ -218,7 +252,7 @@ UINavigationControllerDelegate,ScannerResultDelegate{
             performSegue(withIdentifier: "EditToCardTable", sender: nil)
         }else{
             //TODO: Function which light up your not filled gaps
-            let closeAlertAction = UIAlertController(title: "Error", message: "Please fill all required fields", preferredStyle: .actionSheet)
+            let closeAlertAction = UIAlertController(title: "Error", message: "Please fill all required (red) fields", preferredStyle: .actionSheet)
             let alertAction = UIAlertAction(title: "Close", style: .cancel, handler: nil)
             closeAlertAction.addAction(alertAction)
             self.present(closeAlertAction, animated: true, completion: nil)
@@ -238,10 +272,21 @@ UINavigationControllerDelegate,ScannerResultDelegate{
     }
     
     
+    //
+    var cropImage : UIImage?
+    //
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+     
+        
+        
         fillDictionary()
+        if cropImage != nil{
+            frontImageOutlet.image = cropImage
+        }
         if editCard != nil{
             boolEditValue = true
             insertCartValueWhichMustEditing()
@@ -267,8 +312,7 @@ UINavigationControllerDelegate,ScannerResultDelegate{
         backImageOutlet.image = cardMan.loadImageFromPath(path: (editCard?.backImage)!)
         
         descriptionTextView.text = editCard?.descriptionCard ?? nil
-        
-        //TODO: DESCRIPTION
+     
     }
     
     

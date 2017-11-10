@@ -21,7 +21,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>for creating photo for app </string>
+	<string>for creating photo or scan barcode for app </string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>for choosing photo for app</string>
 	<key>UILaunchStoryboardName</key>
