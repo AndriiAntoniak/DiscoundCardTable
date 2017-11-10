@@ -8,7 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController , UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating{
+class ViewController: UIViewController , UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating,UIPopoverPresentationControllerDelegate, CardSortDelegate{
+    
+    
     
     
     
@@ -141,9 +143,16 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         }else if segue.identifier == "fromCellToPhoto"{
             let scrollPhotoView = segue.destination as! CardPhotoViewController
             scrollPhotoView.selectCard = sender as? Card
+        }else if segue.identifier == "FromTableToPopOver"{
+            let popOver = segue.destination as? PopOverViewController
+            popOver?.popoverPresentationController?.delegate = self as? UIPopoverPresentationControllerDelegate
+            popOver?.delegate = self
         }
     }
     
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
+    }
     
     
     
@@ -201,6 +210,8 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
  //   var isSearched = false
  //   var colorCard : [Card] = []
 //    var cardForFilteringByColor : [Card] = []
+    
+    
     func updateSearchResults(for searchController: UISearchController) {
        
         if searchController.searchBar.text! == "" {
@@ -220,6 +231,28 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         tableView.reloadData()
     }
     
+    
+    //function for sorting card by title and date
+    func sortedCardList(by attribute: SortAttribute) {
+        switch attribute{
+        case .higherDate:
+            discountCard.sort(by: { $0.date! < $1.date!})
+            tableView.reloadData()
+            break
+        case .higherTitle:
+            discountCard.sort(by: { $0.title!.lowercased() > $1.title!.lowercased()})
+            tableView.reloadData()
+            break
+        case .lowerDate:
+            discountCard.sort(by: { $0.date! > $1.date!})
+            tableView.reloadData()
+            break
+        case .lowerTitle:
+            discountCard.sort(by: { $0.title!.lowercased() < $1.title!.lowercased()})
+            tableView.reloadData()
+            break
+        }
+    }
     
   
     

@@ -11,3 +11,6 @@ import Foundation
 protocol ScannerResultDelegate{
     func returnStringBarcode(barcode str:String)
 }
+protocol CardSortDelegate{
+    func sortedCardList(by atribute: SortAttribute)
+}

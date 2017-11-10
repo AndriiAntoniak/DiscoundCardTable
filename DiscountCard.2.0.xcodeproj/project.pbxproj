@@ -22,6 +22,8 @@
 		2B9CE15F1FA8B70D001B1E7C /* CardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9CE15E1FA8B70D001B1E7C /* CardManager.swift */; };
 		2BC5404E1FA9D7F60095649F /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC5404C1FA9D7F60095649F /* Card.swift */; };
 		2BDF81051FAB6A620057755D /* button extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDF81041FAB6A620057755D /* button extension.swift */; };
+		2BF3E8E91FB5F1EB003519A8 /* PopOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF3E8E81FB5F1EB003519A8 /* PopOverViewController.swift */; };
+		2BF3E8EB1FB5F56F003519A8 /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF3E8EA1FB5F56F003519A8 /* Enumerations.swift */; };
 		91AA09FF9B1F22EFBBDBD464 /* Pods_DiscountCard_2_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FB9CF75AA73D91FD0B99552 /* Pods_DiscountCard_2_0.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +45,8 @@
 		2B9CE15E1FA8B70D001B1E7C /* CardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManager.swift; sourceTree = "<group>"; };
 		2BC5404C1FA9D7F60095649F /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		2BDF81041FAB6A620057755D /* button extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "button extension.swift"; sourceTree = "<group>"; };
+		2BF3E8E81FB5F1EB003519A8 /* PopOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverViewController.swift; sourceTree = "<group>"; };
+		2BF3E8EA1FB5F56F003519A8 /* Enumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enumerations.swift; sourceTree = "<group>"; };
 		372008AF3290712BA02F7A7C /* Pods-DiscountCard.2.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiscountCard.2.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-DiscountCard.2.0/Pods-DiscountCard.2.0.release.xcconfig"; sourceTree = "<group>"; };
 		4FB9CF75AA73D91FD0B99552 /* Pods_DiscountCard_2_0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DiscountCard_2_0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF58E2B62D3C4C4A97E71796 /* Pods-DiscountCard.2.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiscountCard.2.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DiscountCard.2.0/Pods-DiscountCard.2.0.debug.xcconfig"; sourceTree = "<group>"; };
@@ -84,7 +88,9 @@
 				2BC5404C1FA9D7F60095649F /* Card.swift */,
 				2BDF81041FAB6A620057755D /* button extension.swift */,
 				2B9CE1451FA89068001B1E7C /* AppDelegate.swift */,
+				2BF3E8EA1FB5F56F003519A8 /* Enumerations.swift */,
 				2B7AEDA61FB4A4790027997C /* CropImageViewController.swift */,
+				2BF3E8E81FB5F1EB003519A8 /* PopOverViewController.swift */,
 				2B795B711FB48329000B53EE /* Delegate.swift */,
 				2B50CD701FB4631E00C9A22B /* ScannerViewController.swift */,
 				2B874B321FB21321003DA942 /* CardPhotoViewController.swift */,
@@ -254,7 +260,9 @@
 				2B9CE15B1FA8A058001B1E7C /* CardTableCell.swift in Sources */,
 				2B9CE1481FA89069001B1E7C /* ViewController.swift in Sources */,
 				2B874B331FB21321003DA942 /* CardPhotoViewController.swift in Sources */,
+				2BF3E8EB1FB5F56F003519A8 /* Enumerations.swift in Sources */,
 				2B9CE1461FA89068001B1E7C /* AppDelegate.swift in Sources */,
+				2BF3E8E91FB5F1EB003519A8 /* PopOverViewController.swift in Sources */,
 				2B795B721FB48329000B53EE /* Delegate.swift in Sources */,
 				2B9CE14E1FA89069001B1E7C /* DiscountCard_2_0.xcdatamodeld in Sources */,
 				2B7AEDA71FB4A4790027997C /* CropImageViewController.swift in Sources */,
