@@ -11,7 +11,8 @@ import RSBarcodes_Swift
 import AVFoundation
 
 class AddEditTableViewController: UITableViewController, UIImagePickerControllerDelegate ,
-UINavigationControllerDelegate,ScannerResultDelegate{
+UINavigationControllerDelegate,ScannerResultDelegate, CropImageDelegate{
+   
     
     
     
@@ -21,7 +22,8 @@ UINavigationControllerDelegate,ScannerResultDelegate{
     
     var editCard : Card?
     
-    var deleteCardIfCancelPressed = false
+    
+   // var deleteCardIfCancelPressed = false
     
     var addCard : Card?
     
@@ -66,6 +68,9 @@ UINavigationControllerDelegate,ScannerResultDelegate{
     func executeAddingImage(){
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
+        //
+        imagePickerController.allowsEditing = true
+        //
         let addImage = UIAlertController(title: "Photo Source", message: "Choose a source of photo", preferredStyle: UIAlertControllerStyle.actionSheet)
         
         addImage.addAction(UIAlertAction(title: "Camera", style: .default, handler: {(action:UIAlertAction) in
@@ -143,19 +148,13 @@ UINavigationControllerDelegate,ScannerResultDelegate{
         let scann = segue.destination as? ScannerViewController
          scann?.delegate = self
         }else if identifaer == "fromAddToCrop"{
-           let crop = segue.destination as? CropImageViewController
             
-            crop?.deleteCardIfCancelPressed = deleteCardIfCancelPressed
+            let crop = segue.destination as? CropImageViewController
             
-            crop?.cardCroppingImage = sender as? Card
+            crop?.image = sender as? UIImage
             
-            crop?.whatIsImage = whatIsImage
-            
-            if whatIsImage == "front"{
-                crop?.image = frontImageOutlet.image
-            }else{
-                crop?.image = backImageOutlet.image
-            }
+            let destination=segue.destination as! CropImageViewController
+            destination.delegate = self
         }
     }
     
@@ -206,21 +205,24 @@ UINavigationControllerDelegate,ScannerResultDelegate{
         picker.dismiss(animated: true, completion: nil)
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+       // let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let image = info[UIImagePickerControllerEditedImage] as! UIImage
+        
+       
+        
+        
         if whatIsImage == "front"{
             frontImageOutlet.image = image
         }else{
             backImageOutlet.image = image
         }
+        
         picker.dismiss(animated: true, completion: {() in
-            if self.boolEditValue == false{
-                self.editCard = Card()
-                self.editCard?.date = Date()
-                self.deleteCardIfCancelPressed = true
+            if self.whatIsImage == "front"{
+                self.performSegue(withIdentifier: "fromAddToCrop", sender: self.frontImageOutlet.image)
+            }else{
+                self.performSegue(withIdentifier: "fromAddToCrop", sender: self.backImageOutlet.image)
             }
-                self.editExistCard()
-            
-                self.performSegue(withIdentifier: "fromAddToCrop", sender: self.editCard)
         })
     }
     
@@ -301,6 +303,7 @@ UINavigationControllerDelegate,ScannerResultDelegate{
         fillDictionary()
         
         if editCard != nil{
+            userDidChooseAnyColorFilter = true
             boolEditValue = true
             insertCartValueWhichMustEditing()
             
@@ -308,11 +311,13 @@ UINavigationControllerDelegate,ScannerResultDelegate{
     }
     
     func insertCartValueWhichMustEditing(){
-        if editCard?.barcode != nil{
+        if editCard?.barcode != nil || editCard?.barcode != ""{
             barcodeString.setTitle(editCard?.barcode, for: .normal)
             barcodeImage.image = RSUnifiedCodeGenerator.shared.generateCode(barcodeString.currentTitle!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue)
             barcodeString.isEnabled = false
         }
+      
+        
         titleFiled.text = editCard?.title
         for filter in filterColorDictionary{
             if filter.value == editCard?.filterColor{
@@ -320,18 +325,23 @@ UINavigationControllerDelegate,ScannerResultDelegate{
                 break
             }
         }
+        
+        
+        //
         if let _ = editCard?.frontImage{
             frontImageOutlet.image = cardMan.loadImageFromPath(path: (editCard?.frontImage)!)
         }
         if let _ = editCard?.backImage{
              backImageOutlet.image = cardMan.loadImageFromPath(path: (editCard?.backImage)!)
         }
+        //
+        
        
         descriptionTextView.text = editCard?.descriptionCard ?? nil
      
     }
     
-    
+  
     //func for editing exist card
     func editExistCard(){
         userDidChooseAnyColorFilter = true
@@ -346,15 +356,8 @@ UINavigationControllerDelegate,ScannerResultDelegate{
                 break
             }
         }
-        if let _ = frontImageOutlet.image{
-            editCard?.frontImage = cardMan.addToUrl(frontImageOutlet.image!)
-        }
-        if let _ = backImageOutlet.image{
-            editCard?.backImage = cardMan.addToUrl(backImageOutlet.image!)
-        }
-        
-   //     editCard?.frontImage = cardMan.addToUrl(frontImageOutlet.image!)
-    //    editCard?.backImage = cardMan.addToUrl(backImageOutlet.image!)
+        editCard?.frontImage = cardMan.addToUrl(frontImageOutlet.image!)
+        editCard?.backImage = cardMan.addToUrl(backImageOutlet.image!)
         editCard?.descriptionCard = descriptionTextView.text
     }
     
@@ -371,7 +374,12 @@ UINavigationControllerDelegate,ScannerResultDelegate{
         }
         addCard?.frontImage = cardMan.addToUrl(frontImageOutlet.image!)
         addCard?.backImage = cardMan.addToUrl(backImageOutlet.image!)
-        addCard?.barcode = barcodeString.currentTitle
+        if barcodeString.currentTitle == "Create Barcode"{
+            addCard?.barcode = ""
+        }else{
+            addCard?.barcode = barcodeString.currentTitle
+        }
+        
         addCard?.descriptionCard = descriptionTextView.text
     }
     
@@ -389,13 +397,20 @@ UINavigationControllerDelegate,ScannerResultDelegate{
     }
     
     
+    func croppingImage(_ image: UIImage) {
+        if whatIsImage == "front"{
+            frontImageOutlet.image = image
+        }else{
+            backImageOutlet.image = image
+        }
+    }
     
 
     
     @IBAction func ifCardIsCreated(_ sender: UIBarButtonItem) {
-        if deleteCardIfCancelPressed == true{
+       /* if deleteCardIfCancelPressed == true{
             CardManager.deleteCard(card: editCard!)
-        }
+        }*/
         performSegue(withIdentifier: "EditToCardTable", sender: nil)
     }
     

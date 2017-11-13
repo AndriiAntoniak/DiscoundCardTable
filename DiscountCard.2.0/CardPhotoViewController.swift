@@ -12,8 +12,44 @@ class CardPhotoViewController: UIViewController {
 
      var selectCard : Card?
     
+    var cardMan = CardManager()
    
+    @IBOutlet weak var frontImage: UIImageView!
     
+    @IBOutlet weak var backImage: UIImageView!
+    
+    @IBOutlet weak var barcodeImage: UIImageView?
+    
+    
+    func installPhoto(){
+        frontImage.image = cardMan.loadImageFromPath(path: (selectCard?.frontImage)!)
+        backImage.image = cardMan.loadImageFromPath(path: (selectCard?.backImage)!)
+        if let _ = cardMan.loadImageFromPath(path: (selectCard?.barcode)!){
+            barcodeImage?.image = cardMan.loadImageFromPath(path: (selectCard?.barcode)!)
+        }else{
+            print("nety")
+        }
+    }
+    
+    
+    func rotate(_ image: inout UIImage?){
+        if let originalImage = image {
+            let rotateSize = CGSize(width: originalImage.size.height, height: originalImage.size.width)
+            UIGraphicsBeginImageContextWithOptions(rotateSize, true, 2.0)
+            if let context = UIGraphicsGetCurrentContext() {
+                context.rotate(by: 90.0 * CGFloat(Double.pi) / 180.0)
+                context.translateBy(x: 0, y: -originalImage.size.height)
+                originalImage.draw(in: CGRect.init(x: 0, y: 0, width: originalImage.size.width, height: originalImage.size.height))
+                image = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
+            }
+        }
+    }
+    
+  
+
+    
+    //TODO: remake IT!!!
 
     @IBAction func backToCardTable(_ sender: Any) {
         performSegue(withIdentifier: "fromPhotoToTable", sender: nil)
@@ -25,38 +61,37 @@ class CardPhotoViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "fromPhotoToAddEdit"{
-            print("edit2")
             let addEdit = segue.destination as! AddEditTableViewController
             addEdit.editCard = sender as? Card
         }else if segue.identifier == "fromPhotoToTable"{
-            print("back2")
             _ = segue.destination as! ViewController
-        }else{
-            print("what?")
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        
+        
+        installPhoto()
+        rotate(&frontImage.image)
+        rotate(&backImage.image)
+      //  rotate(&barcodeImage?.image)
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+  
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

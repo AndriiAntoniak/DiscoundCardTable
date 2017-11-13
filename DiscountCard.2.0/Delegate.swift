@@ -7,10 +7,15 @@
 //
 
 import Foundation
+import UIKit
 
 protocol ScannerResultDelegate{
     func returnStringBarcode(barcode str:String)
 }
 protocol CardSortDelegate{
     func sortedCardList(by atribute: SortAttribute)
+}
+
+protocol CropImageDelegate {
+    func croppingImage(_ image: UIImage)
 }

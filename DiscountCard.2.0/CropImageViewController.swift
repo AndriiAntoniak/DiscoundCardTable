@@ -10,14 +10,16 @@ import UIKit
 
 class CropImageViewController: UIViewController, UIScrollViewDelegate{
 
-    var cardCroppingImage : Card?
+
     var newImage : UIImage?
-    var whatIsImage : String?
-    var deleteCardIfCancelPressed : Bool?
     
     @IBOutlet weak var scrollView: UIScrollView!
+    
     var imageView = UIImageView()
+    
     var image : UIImage?
+    
+    var delegate : CropImageDelegate?
     
     @IBAction func cropButton(_ sender: UIButton) {
         UIGraphicsBeginImageContextWithOptions(scrollView.bounds.size, true, UIScreen.main.scale)
@@ -31,7 +33,10 @@ class CropImageViewController: UIViewController, UIScrollViewDelegate{
         scrollView.layer.render(in: UIGraphicsGetCurrentContext()!)
          newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        performSegue(withIdentifier: "fromCropToAdd", sender: newImage)
+        //
+         delegate?.croppingImage(newImage!)
+        dismiss(animated: true, completion: nil)
+ //       performSegue(withIdentifier: "fromCropToAdd", sender: newImage)
     }
     
     
@@ -39,15 +44,18 @@ class CropImageViewController: UIViewController, UIScrollViewDelegate{
     
     
     @IBAction func cancelButton(_ sender: Any) {
-        performSegue(withIdentifier: "fromCropToAdd", sender: nil)
+        dismiss(animated: true, completion: nil)
+  //      performSegue(withIdentifier: "fromCropToAdd", sender: nil)
     }
     
     var cardMan = CardManager()
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "fromCropToAdd"{
-            
-            let newPhoto = segue.destination as? AddEditTableViewController
-            
+            delegate?.croppingImage((sender as? UIImage)!)
+           
+         //   let newPhoto = segue.destination as? AddEditTableViewController
+            /*
             if let _ = sender as? UIImage{
                 if whatIsImage == "front"{
                     cardCroppingImage?.frontImage = cardMan.addToUrl((sender as? UIImage)!)
@@ -60,7 +68,7 @@ class CropImageViewController: UIViewController, UIScrollViewDelegate{
             }else{
                 newPhoto?.deleteCardIfCancelPressed = deleteCardIfCancelPressed!
                 newPhoto?.editCard = cardCroppingImage
-            }
+            }*/
         }
     }
     

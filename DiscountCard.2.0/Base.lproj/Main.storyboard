@@ -81,13 +81,20 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
                                     <navigationItem title="CardList" id="uhI-pV-ZW0">
-                                        <barButtonItem key="leftBarButtonItem" title="Sort" id="rrg-aV-Ec6">
-                                            <connections>
-                                                <segue destination="46S-TX-0Ap" kind="popoverPresentation" identifier="FromTableToPopOver" popoverAnchorBarButtonItem="rrg-aV-Ec6" id="aUo-xU-JQM">
-                                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                                </segue>
-                                            </connections>
-                                        </barButtonItem>
+                                        <leftBarButtonItems>
+                                            <barButtonItem title="Sort" id="rrg-aV-Ec6">
+                                                <connections>
+                                                    <segue destination="46S-TX-0Ap" kind="popoverPresentation" identifier="FromTableToPopOver" popoverAnchorBarButtonItem="rrg-aV-Ec6" id="aUo-xU-JQM">
+                                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                                    </segue>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Item" id="ttV-AE-eq7">
+                                                <connections>
+                                                    <segue destination="sby-8J-EJd" kind="show" id="jdb-FS-asd"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </leftBarButtonItems>
                                         <rightBarButtonItems>
                                             <barButtonItem systemItem="add" id="4kh-bb-icc">
                                                 <connections>
@@ -783,6 +790,24 @@
             </objects>
             <point key="canvasLocation" x="1040.8" y="-1.3493253373313345"/>
         </scene>
+        <!--TouchID View Controller-->
+        <scene sceneID="g5q-5X-R65">
+            <objects>
+                <viewController id="sby-8J-EJd" customClass="TouchIDViewController" customModule="DiscountCard_2_0" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mR2-lB-MW9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="Dgg-a1-Dab"/>
+                    </view>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="fromTouchIDToTable" id="swD-TV-dFS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hq4-mQ-VAz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-686" y="-733"/>
+        </scene>
         <!--Card Photo View Controller-->
         <scene sceneID="ceP-od-TDg">
             <objects>
@@ -817,17 +842,50 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="8ko-bY-7bC" userLabel="Photo Stack">
                                                 <rect key="frame" x="0.0" y="0.0" width="1125" height="603"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sdo-9f-mIt">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sdo-9f-mIt" userLabel="Front">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
-                                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <subviews>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mFy-El-TeD" userLabel="Front Image View">
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                                            </imageView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" red="0.92619913816452026" green="0.018868532691928491" blue="0.11369495453682053" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstItem="mFy-El-TeD" firstAttribute="leading" secondItem="Sdo-9f-mIt" secondAttribute="leading" id="D1l-pR-ET7"/>
+                                                            <constraint firstItem="mFy-El-TeD" firstAttribute="top" secondItem="Sdo-9f-mIt" secondAttribute="top" id="G0T-g2-iX9"/>
+                                                            <constraint firstAttribute="trailing" secondItem="mFy-El-TeD" secondAttribute="trailing" id="d0z-Ss-Bkm"/>
+                                                            <constraint firstAttribute="bottom" secondItem="mFy-El-TeD" secondAttribute="bottom" id="rIE-Ot-ObE"/>
+                                                        </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dIB-Lv-ssJ">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dIB-Lv-ssJ" userLabel="Back">
                                                         <rect key="frame" x="375" y="0.0" width="375" height="603"/>
+                                                        <subviews>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aEf-24-bhs" userLabel="Back Image View">
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                                            </imageView>
+                                                        </subviews>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="aEf-24-bhs" secondAttribute="bottom" id="4Vv-vI-Cfm"/>
+                                                            <constraint firstItem="aEf-24-bhs" firstAttribute="leading" secondItem="dIB-Lv-ssJ" secondAttribute="leading" id="7bT-IX-hdv"/>
+                                                            <constraint firstItem="aEf-24-bhs" firstAttribute="top" secondItem="dIB-Lv-ssJ" secondAttribute="top" id="g75-CN-xXJ"/>
+                                                            <constraint firstAttribute="trailing" secondItem="aEf-24-bhs" secondAttribute="trailing" id="yJA-zx-48O"/>
+                                                        </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nqq-DM-1i6">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nqq-DM-1i6" userLabel="Barcode">
                                                         <rect key="frame" x="750" y="0.0" width="375" height="603"/>
+                                                        <subviews>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NIw-Wd-pGK" userLabel="Barcode Image View">
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                                            </imageView>
+                                                        </subviews>
                                                         <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="NIw-Wd-pGK" secondAttribute="bottom" id="7SO-P0-rfd"/>
+                                                            <constraint firstItem="NIw-Wd-pGK" firstAttribute="top" secondItem="Nqq-DM-1i6" secondAttribute="top" id="YYx-7p-9CJ"/>
+                                                            <constraint firstAttribute="trailing" secondItem="NIw-Wd-pGK" secondAttribute="trailing" id="oeG-0g-Bf6"/>
+                                                            <constraint firstItem="NIw-Wd-pGK" firstAttribute="leading" secondItem="Nqq-DM-1i6" secondAttribute="leading" id="qfB-Qa-SFx"/>
+                                                        </constraints>
                                                     </view>
                                                 </subviews>
                                             </stackView>
@@ -855,6 +913,7 @@
                         <constraints>
                             <constraint firstItem="oS4-SF-F11" firstAttribute="trailing" secondItem="TGv-u7-rNP" secondAttribute="trailing" id="1qS-jT-dUg"/>
                             <constraint firstItem="zTD-8b-fAk" firstAttribute="top" secondItem="TGv-u7-rNP" secondAttribute="top" id="4gp-sG-qve"/>
+                            <constraint firstItem="oS4-SF-F11" firstAttribute="top" secondItem="TGv-u7-rNP" secondAttribute="top" constant="44" id="4oA-2l-nAF"/>
                             <constraint firstItem="oS4-SF-F11" firstAttribute="bottom" secondItem="TGv-u7-rNP" secondAttribute="bottom" id="Li7-TK-RHl"/>
                             <constraint firstItem="oS4-SF-F11" firstAttribute="leading" secondItem="TGv-u7-rNP" secondAttribute="leading" id="Zk6-xG-6CG"/>
                             <constraint firstItem="zTD-8b-fAk" firstAttribute="leading" secondItem="TGv-u7-rNP" secondAttribute="leading" id="gbk-SO-gIl"/>
@@ -862,15 +921,24 @@
                             <constraint firstItem="zTD-8b-fAk" firstAttribute="trailing" secondItem="TGv-u7-rNP" secondAttribute="trailing" id="za1-Wh-Ox3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="TGv-u7-rNP"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="yBd-mM-Sad"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <size key="freeformSize" width="375" height="667"/>
                     <connections>
+                        <outlet property="backImage" destination="aEf-24-bhs" id="xJp-XP-hLQ"/>
+                        <outlet property="barcodeImage" destination="NIw-Wd-pGK" id="qaH-sT-BNM"/>
+                        <outlet property="frontImage" destination="mFy-El-TeD" id="7Rf-Ii-hKS"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="fromPhotoToTable" id="qIj-a7-RvG"/>
                         <segue destination="AJb-1X-rb4" kind="show" identifier="fromPhotoToAddEdit" id="7SI-ea-DD2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wqa-ZE-Mi6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="591" y="-830"/>
+            <point key="canvasLocation" x="589.60000000000002" y="-830.73463268365822"/>
         </scene>
         <!--Crop Image View Controller-->
         <scene sceneID="h4c-kE-QJF">
@@ -882,7 +950,6 @@
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oqi-W0-K0C">
                                 <rect key="frame" x="0.0" y="276" width="375" height="135"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="135" id="E4l-Hm-IE3"/>
                                 </constraints>
@@ -913,7 +980,6 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.065431795060000006" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="YWV-gf-1Bd" firstAttribute="leading" secondItem="3uX-in-6od" secondAttribute="leading" id="423-Mx-aYS"/>
                             <constraint firstItem="oqi-W0-K0C" firstAttribute="centerX" secondItem="3uX-in-6od" secondAttribute="centerX" id="IW3-8T-nSk"/>
@@ -968,7 +1034,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="22c-fR-auW"/>
+        <segue reference="7SI-ea-DD2"/>
         <segue reference="RrS-Rk-8Xd"/>
     </inferredMetricsTieBreakers>
 </document>

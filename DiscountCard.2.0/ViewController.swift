@@ -22,9 +22,14 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     
     @IBOutlet weak var tableView: UITableView!
     
+    
+    
+    //
     //MARK: SEARCH
     @IBOutlet var searchBar: UISearchBar!
-
+//
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -54,7 +59,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         //
         
         //
-        
+
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         tableView.tableHeaderView = searchController.searchBar
@@ -104,6 +109,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         default:break
         }
         return UIColor.clear
+        
     }
     
     
@@ -145,7 +151,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
             scrollPhotoView.selectCard = sender as? Card
         }else if segue.identifier == "FromTableToPopOver"{
             let popOver = segue.destination as? PopOverViewController
-            popOver?.popoverPresentationController?.delegate = self as? UIPopoverPresentationControllerDelegate
+            popOver?.popoverPresentationController?.delegate = self /*as? UIPopoverPresentationControllerDelegate*/
             popOver?.delegate = self
         }
     }
