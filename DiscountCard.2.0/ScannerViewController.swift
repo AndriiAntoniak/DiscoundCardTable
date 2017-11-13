@@ -22,6 +22,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        square.layer.borderColor = #colorLiteral(red: 0.9261991382, green: 0.01886853269, blue: 0.1136949545, alpha: 1)
+        square.layer.borderWidth = 15
+        
         let session = AVCaptureSession()
         
         let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
@@ -44,14 +47,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         session.startRunning()
     }
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        if/* metadataObjects != nil && */metadataObjects.count != 0{
+        if metadataObjects.count != 0{
             if let object = metadataObjects[0] as? AVMetadataMachineReadableCodeObject{
                 if object.type == AVMetadataObject.ObjectType.ean13{
                     delegate?.returnStringBarcode(barcode: object.stringValue!)
                     dismiss(animated: true, completion: nil)
-                    //  performSegue(withIdentifier: "fromScannerToAdd", sender: nil)
-                    //  delegate?.returnStringBarcode(barcode: object.stringValue!)
-                    //TODO: work or not ?? must check !!!!
                 }
             }
         }
@@ -62,10 +62,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     @IBOutlet weak var square: UIView!
     //
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+
     
     
 }

@@ -21,7 +21,7 @@ class CropImageViewController: UIViewController, UIScrollViewDelegate{
     
     var delegate : CropImageDelegate?
     
-    @IBAction func cropButton(_ sender: UIButton) {
+    @IBAction func cropButton(_ sender: Any) {
         UIGraphicsBeginImageContextWithOptions(scrollView.bounds.size, true, UIScreen.main.scale)
         
         let offSet = scrollView.contentOffset
@@ -36,7 +36,6 @@ class CropImageViewController: UIViewController, UIScrollViewDelegate{
         //
          delegate?.croppingImage(newImage!)
         dismiss(animated: true, completion: nil)
- //       performSegue(withIdentifier: "fromCropToAdd", sender: newImage)
     }
     
     
@@ -45,32 +44,9 @@ class CropImageViewController: UIViewController, UIScrollViewDelegate{
     
     @IBAction func cancelButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
-  //      performSegue(withIdentifier: "fromCropToAdd", sender: nil)
     }
     
-    var cardMan = CardManager()
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "fromCropToAdd"{
-            delegate?.croppingImage((sender as? UIImage)!)
-           
-         //   let newPhoto = segue.destination as? AddEditTableViewController
-            /*
-            if let _ = sender as? UIImage{
-                if whatIsImage == "front"{
-                    cardCroppingImage?.frontImage = cardMan.addToUrl((sender as? UIImage)!)
-                }else{
-                    cardCroppingImage?.backImage = cardMan.addToUrl((sender as? UIImage)!)
-                }
-                newPhoto?.deleteCardIfCancelPressed = deleteCardIfCancelPressed!
-                newPhoto?.editCard = cardCroppingImage
-                
-            }else{
-                newPhoto?.deleteCardIfCancelPressed = deleteCardIfCancelPressed!
-                newPhoto?.editCard = cardCroppingImage
-            }*/
-        }
-    }
+
     
     
     override func viewDidLoad() {

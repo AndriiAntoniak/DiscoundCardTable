@@ -91,9 +91,14 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         cell.cardTitle?.text = card.title
         cell.cardDate?.text = DateFormatter.localizedString(from: card.date! as Date , dateStyle: DateFormatter.Style.medium, timeStyle: DateFormatter.Style.medium)
         cell.colorFilter?.backgroundColor = installColorForFilter(card:card)
+        //
         cell.backImage?.image = cardManager.loadImageFromPath(path:  card.backImage!)
-        cell.frontImage?.image = cardManager.loadImageFromPath(path: card.frontImage!)
+        //
         
+        
+        cell.frontImage?.image = cardManager.loadImageFromPath(path: card.frontImage!)
+        cell.frontImage?.layer.cornerRadius = 20
+        cell.frontImage?.clipsToBounds = true
         
         return cell
     }

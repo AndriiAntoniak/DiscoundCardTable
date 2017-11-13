@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import RSBarcodes_Swift
+import AVFoundation
 
-class CardPhotoViewController: UIViewController {
+class CardPhotoViewController: UIViewController , UIScrollViewDelegate {
 
      var selectCard : Card?
     
@@ -20,19 +22,24 @@ class CardPhotoViewController: UIViewController {
     
     @IBOutlet weak var barcodeImage: UIImageView?
     
+   var barcodeIsNil = false
     
     func installPhoto(){
         frontImage.image = cardMan.loadImageFromPath(path: (selectCard?.frontImage)!)
         backImage.image = cardMan.loadImageFromPath(path: (selectCard?.backImage)!)
-        if let _ = cardMan.loadImageFromPath(path: (selectCard?.barcode)!){
-            barcodeImage?.image = cardMan.loadImageFromPath(path: (selectCard?.barcode)!)
+       
+        
+        if let _ = RSUnifiedCodeGenerator.shared.generateCode((selectCard?.barcode)!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue){
+            barcodeImage?.image = RSUnifiedCodeGenerator.shared.generateCode((selectCard?.barcode)!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue)
         }else{
-            print("nety")
+            barcodeImage?.image = #imageLiteral(resourceName: "Flag_of_None")
+            barcodeIsNil = true
         }
+
     }
     
     
-    func rotate(_ image: inout UIImage?){
+    func rotate(_ image: UIImage?)->UIImage?{
         if let originalImage = image {
             let rotateSize = CGSize(width: originalImage.size.height, height: originalImage.size.width)
             UIGraphicsBeginImageContextWithOptions(rotateSize, true, 2.0)
@@ -40,16 +47,15 @@ class CardPhotoViewController: UIViewController {
                 context.rotate(by: 90.0 * CGFloat(Double.pi) / 180.0)
                 context.translateBy(x: 0, y: -originalImage.size.height)
                 originalImage.draw(in: CGRect.init(x: 0, y: 0, width: originalImage.size.width, height: originalImage.size.height))
-                image = UIGraphicsGetImageFromCurrentImageContext()
+                let rotatedImage = UIGraphicsGetImageFromCurrentImageContext()
                 UIGraphicsEndImageContext()
+                return rotatedImage!
             }
         }
+        return nil
     }
     
   
-
-    
-    //TODO: remake IT!!!
 
     @IBAction func backToCardTable(_ sender: Any) {
         performSegue(withIdentifier: "fromPhotoToTable", sender: nil)
@@ -68,19 +74,48 @@ class CardPhotoViewController: UIViewController {
         }
     }
     
+    func roundedCornerViewController(){
+        frontImage?.layer.cornerRadius = 20
+        frontImage?.clipsToBounds = true
+        
+        backImage?.layer.cornerRadius = 20
+        backImage?.clipsToBounds = true
+        
+        barcodeImage?.layer.cornerRadius = 20
+        barcodeImage?.clipsToBounds = true
+    }
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         
-        
         installPhoto()
-        rotate(&frontImage.image)
-        rotate(&backImage.image)
-      //  rotate(&barcodeImage?.image)
+        roundedCornerViewController()
+       
+        //
+        frontImage.image = rotate(frontImage.image)
+        backImage.image = rotate(backImage.image)
         
+        if !barcodeIsNil{
+            barcodeImage?.image = rotate(barcodeImage?.image)
+        }
+        //
+        scrollPhotoView.delegate = self
     }
 
+    
+    @IBOutlet weak var pageControl: UIPageControl!
+    
+    @IBOutlet weak var scrollPhotoView: UIScrollView!
+    
   
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let pageNumber = scrollPhotoView.contentOffset.x / scrollPhotoView.frame.size.width
+        pageControl.currentPage = Int(pageNumber)
+    }
     
     
     

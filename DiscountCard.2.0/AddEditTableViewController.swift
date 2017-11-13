@@ -11,7 +11,7 @@ import RSBarcodes_Swift
 import AVFoundation
 
 class AddEditTableViewController: UITableViewController, UIImagePickerControllerDelegate ,
-UINavigationControllerDelegate,ScannerResultDelegate, CropImageDelegate{
+UINavigationControllerDelegate,ScannerResultDelegate, CropImageDelegate/*, UITextFieldDelegate*/{
    
     
     
@@ -252,6 +252,7 @@ UINavigationControllerDelegate,ScannerResultDelegate, CropImageDelegate{
     }
     
     
+   
     
     
     // exchange backgroundcolor
@@ -311,9 +312,11 @@ UINavigationControllerDelegate,ScannerResultDelegate, CropImageDelegate{
     }
     
     func insertCartValueWhichMustEditing(){
-        if editCard?.barcode != nil || editCard?.barcode != ""{
+        if editCard?.barcode != nil{
             barcodeString.setTitle(editCard?.barcode, for: .normal)
-            barcodeImage.image = RSUnifiedCodeGenerator.shared.generateCode(barcodeString.currentTitle!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue)
+            if let _ = barcodeString.currentTitle {
+                barcodeImage.image = RSUnifiedCodeGenerator.shared.generateCode(barcodeString.currentTitle!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue)
+            }
             barcodeString.isEnabled = false
         }
       
@@ -374,9 +377,7 @@ UINavigationControllerDelegate,ScannerResultDelegate, CropImageDelegate{
         }
         addCard?.frontImage = cardMan.addToUrl(frontImageOutlet.image!)
         addCard?.backImage = cardMan.addToUrl(backImageOutlet.image!)
-        if barcodeString.currentTitle == "Create Barcode"{
-            addCard?.barcode = ""
-        }else{
+        if barcodeString.currentTitle != "Create Barcode"{
             addCard?.barcode = barcodeString.currentTitle
         }
         

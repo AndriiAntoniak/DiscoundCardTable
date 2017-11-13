@@ -29,7 +29,6 @@ class TouchIDViewController: UIViewController {
          var error : NSError?
         
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error){
-            self.view.backgroundColor = UIColor.green
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Because we need!", reply: {(issuccessfull,error) in
                 if issuccessfull{
                     self.goToTable()
@@ -40,10 +39,7 @@ class TouchIDViewController: UIViewController {
                         case LAError.userCancel.rawValue:
                             exit(0)
                         case LAError.userFallback.rawValue:
-                            print("user wonna enter password")
-                           
-                            self.enterPassword()
-                        //    self.badTouchID()
+                                self.enterPassword()
                         default: break
                         }
                     }
@@ -70,12 +66,14 @@ class TouchIDViewController: UIViewController {
         let passwordAlertController = UIAlertController(title: "Password", message: "Please,enter your password", preferredStyle: .alert)
   
         DispatchQueue.main.async {
+            
         passwordAlertController.addTextField(configurationHandler: {(textField) in
+            /*textField.keyboardType = UIKeyboardType.phonePad*/
             textField.isSecureTextEntry = true
             textField.text = ""
         })
        
-        }
+       }
         
         passwordAlertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (alert:UIAlertAction) in
           
@@ -83,63 +81,26 @@ class TouchIDViewController: UIViewController {
             if enteredPassword.text == self.passwordLOL{
                 self.goToTable()
             }else{
-                print("wrong Password")
                 exit(0)
             }
         }))
         
-        let alertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let alertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {(action:UIAlertAction) in
+            exit(0)
+        })
         
         passwordAlertController.addAction(alertAction)
         
-        
-      
-        
-        self.present(passwordAlertController, animated: true, completion: nil)
-        
-        //
-        
-        
-        
+        DispatchQueue.main.async {
+            self.present(passwordAlertController, animated: true, completion: nil)
+        }
+  //      present(passwordAlertController, animated: true, completion: nil)
         
     }
 
     
     
-    
-    func badTouchID(){
-     
-        let alertController = UIAlertController(title: "Unrecognized fingerprints", message: "Please repeat or input password", preferredStyle: .alert)
-        
-        let repeatAction = UIAlertAction(title: "Repeat", style: .default, handler: {(action:UIAlertAction) in self.touchID()})
-        
-        alertController.addAction(repeatAction)
-        
-        let passwordAction = UIAlertAction(title: "Input password", style: .default, handler: {(action:UIAlertAction) in
-            let passwordController = UIAlertController(title: "Input password", message: nil, preferredStyle: .alert)
-            passwordController.addTextField(configurationHandler: {(textField) in
-                textField.isSecureTextEntry = true
-                textField.text = ""
-            })
-            passwordController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (alert:UIAlertAction) in
-                let textField = passwordController.textFields![0]
-                self.password?.text = textField.text
-                }))
-            
-            let alertAction = UIAlertAction(title: "Close", style: .cancel, handler: {(action :UIAlertAction) in exit(0)})
-           
-            passwordController.addAction(alertAction)
-            
-            self.present(passwordController, animated: true, completion: nil)
-            
-        })
-        alertController.addAction(passwordAction)
-        
-        self.present(alertController, animated: true, completion: nil)
-        
-        
-    }
-    
+   
     
     
     
