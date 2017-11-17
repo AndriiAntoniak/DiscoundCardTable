@@ -1,0 +1,87 @@
+
+/* Class = "UINavigationItem"; title = "Card Photo"; ObjectID = "6h0-je-8LT"; */
+"6h0-je-8LT.title" = "Card Photo";
+
+/* Class = "UIButton"; normalTitle = "Change"; ObjectID = "6xv-Ee-Rhp"; */
+"6xv-Ee-Rhp.normalTitle" = "Change";
+
+/* Class = "UINavigationItem"; title = "Card"; ObjectID = "BF3-eP-9S0"; */
+"BF3-eP-9S0.title" = "Card";
+
+/* Class = "UIButton"; normalTitle = "A-Z ↑"; ObjectID = "CzK-8T-XXm"; */
+"CzK-8T-XXm.normalTitle" = "A-Z ↑";
+
+/* Class = "UIButton"; normalTitle = "Date ↓"; ObjectID = "DSi-8T-OnW"; */
+"DSi-8T-OnW.normalTitle" = "Date ↓";
+
+/* Class = "UITextField"; placeholder = "new password"; ObjectID = "EYy-CH-fPL"; */
+"EYy-CH-fPL.placeholder" = "new password";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "FLg-IJ-tvU"; */
+"FLg-IJ-tvU.title" = "Settings";
+
+/* Class = "UIButton"; normalTitle = "Date ↑"; ObjectID = "FP7-3t-j89"; */
+"FP7-3t-j89.normalTitle" = "Date ↑";
+
+/* Class = "UILabel"; text = "Title:"; ObjectID = "Onw-yM-Epq"; */
+"Onw-yM-Epq.text" = "Title:";
+
+/* Class = "UILabel"; text = "+"; ObjectID = "R6p-E6-eha"; */
+"R6p-E6-eha.text" = "+";
+
+/* Class = "UINavigationItem"; title = "Description"; ObjectID = "RJa-eC-YaL"; */
+"RJa-eC-YaL.title" = "Description";
+
+/* Class = "UILabel"; text = "Change Password"; ObjectID = "WW8-HG-FCj"; */
+"WW8-HG-FCj.text" = "Change Password";
+
+/* Class = "UITableViewSection"; headerTitle = "Description"; ObjectID = "Xtb-5T-bnt"; */
+"Xtb-5T-bnt.headerTitle" = "Description";
+
+/* Class = "UIButton"; normalTitle = "Create Barcode"; ObjectID = "Z6y-HA-xSb"; */
+"Z6y-HA-xSb.normalTitle" = "Create Barcode";
+
+/* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "ZBi-5s-GrA"; */
+"ZBi-5s-GrA.title" = "Back";
+
+/* Class = "UITextField"; placeholder = "reteat new password"; ObjectID = "bmw-Wf-x0z"; */
+"bmw-Wf-x0z.placeholder" = "reteat new password";
+
+/* Class = "UITableViewSection"; headerTitle = "Color filter"; ObjectID = "bsU-Xz-hhZ"; */
+"bsU-Xz-hhZ.headerTitle" = "Color filter";
+
+/* Class = "UIButton"; normalTitle = "A-Z ↓"; ObjectID = "cb6-Ww-c6D"; */
+"cb6-Ww-c6D.normalTitle" = "A-Z ↓";
+
+/* Class = "UITableViewSection"; headerTitle = "Back Image"; ObjectID = "fdd-6t-VrR"; */
+"fdd-6t-VrR.headerTitle" = "Back Image";
+
+/* Class = "UILabel"; text = "Title:"; ObjectID = "hUL-rs-mzR"; */
+"hUL-rs-mzR.text" = "Title:";
+
+/* Class = "UITableViewSection"; headerTitle = "Barcode"; ObjectID = "lT8-1P-Q3F"; */
+"lT8-1P-Q3F.headerTitle" = "Barcode";
+
+/* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "mSi-7v-c1e"; */
+"mSi-7v-c1e.title" = "Back";
+
+/* Class = "UITextField"; placeholder = "Input card name"; ObjectID = "n0Q-wH-Dq3"; */
+"n0Q-wH-Dq3.placeholder" = "Input card name";
+
+/* Class = "UINavigationItem"; title = "CardList"; ObjectID = "uhI-pV-ZW0"; */
+"uhI-pV-ZW0.title" = "CardList";
+
+/* Class = "UILabel"; text = "Date:"; ObjectID = "uiI-3f-XNB"; */
+"uiI-3f-XNB.text" = "Date:";
+
+/* Class = "UITextField"; placeholder = "old password"; ObjectID = "v4Y-AA-s7s"; */
+"v4Y-AA-s7s.placeholder" = "old password";
+
+/* Class = "UITableViewSection"; headerTitle = "Title"; ObjectID = "vqK-7X-Sil"; */
+"vqK-7X-Sil.headerTitle" = "Title";
+
+/* Class = "UILabel"; text = "+"; ObjectID = "xJ7-kt-QQF"; */
+"xJ7-kt-QQF.text" = "+";
+
+/* Class = "UITableViewSection"; headerTitle = "Front Image"; ObjectID = "yf5-9W-HJa"; */
+"yf5-9W-HJa.headerTitle" = "Front Image";

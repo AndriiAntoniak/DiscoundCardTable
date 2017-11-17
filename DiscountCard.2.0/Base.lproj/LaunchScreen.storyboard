@@ -5,7 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CardList" translatesAutoresizingMaskIntoConstraints="NO" id="aPj-FL-fSM">
-                                <rect key="frame" x="0.0" y="227" width="375" height="233"/>
+                                <rect key="frame" x="0.0" y="156" width="375" height="375"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="375" id="w2v-0I-Elr"/>
                                 </constraints>
@@ -29,7 +29,7 @@
                         <constraints>
                             <constraint firstItem="aPj-FL-fSM" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="bBJ-Ht-5jX"/>
                             <constraint firstItem="aPj-FL-fSM" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="ehH-AD-C99"/>
-                            <constraint firstItem="aPj-FL-fSM" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" multiplier="0.35" id="po9-KV-3BP"/>
+                            <constraint firstItem="aPj-FL-fSM" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="width" id="po9-KV-3BP"/>
                             <constraint firstItem="aPj-FL-fSM" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="yUg-jL-oj0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

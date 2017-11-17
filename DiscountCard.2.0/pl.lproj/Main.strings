@@ -1,0 +1,90 @@
+
+/* Class = "UINavigationItem"; title = "Card Photo"; ObjectID = "6h0-je-8LT"; */
+"6h0-je-8LT.title" = "Card Photo";
+
+/* Class = "UINavigationItem"; title = "Card"; ObjectID = "BF3-eP-9S0"; */
+"BF3-eP-9S0.title" = "Karta";
+
+/* Class = "UIButton"; normalTitle = "A-Z ↑"; ObjectID = "CzK-8T-XXm"; */
+"CzK-8T-XXm.normalTitle" = "A-Ż ↑";
+
+/* Class = "UIButton"; normalTitle = "Date ↓"; ObjectID = "DSi-8T-OnW"; */
+"DSi-8T-OnW.normalTitle" = "Data ↓";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "FLg-IJ-tvU"; */
+"FLg-IJ-tvU.title" = "Ustawienia";
+
+/* Class = "UIButton"; normalTitle = "Date ↑"; ObjectID = "FP7-3t-j89"; */
+"FP7-3t-j89.normalTitle" = "Data ↑";
+
+/* Class = "UILabel"; text = "Title:"; ObjectID = "Onw-yM-Epq"; */
+"Onw-yM-Epq.text" = "Tytuł:";
+
+/* Class = "UILabel"; text = "+"; ObjectID = "R6p-E6-eha"; */
+"R6p-E6-eha.text" = "+";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "SYh-Hc-Z7r"; */
+"SYh-Hc-Z7r.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "UITableViewSection"; headerTitle = "Description"; ObjectID = "Xtb-5T-bnt"; */
+"Xtb-5T-bnt.headerTitle" = "Opis";
+
+/* Class = "UIButton"; normalTitle = "Create Barcode"; ObjectID = "Z6y-HA-xSb"; */
+"Z6y-HA-xSb.normalTitle" = "Utwórz kod kreskowy";
+
+/* Class = "UITableViewSection"; headerTitle = "Color filter"; ObjectID = "bsU-Xz-hhZ"; */
+"bsU-Xz-hhZ.headerTitle" = "Filtr kolorów";
+
+/* Class = "UIButton"; normalTitle = "A-Z ↓"; ObjectID = "cb6-Ww-c6D"; */
+"cb6-Ww-c6D.normalTitle" = "A-Ż ↓";
+
+/* Class = "UITableViewSection"; headerTitle = "Back Image"; ObjectID = "fdd-6t-VrR"; */
+"fdd-6t-VrR.headerTitle" = "Obraz z tyłu";
+
+/* Class = "UILabel"; text = "Title:"; ObjectID = "hUL-rs-mzR"; */
+"hUL-rs-mzR.text" = "Tytuł:";
+
+/* Class = "UITableViewSection"; headerTitle = "Barcode"; ObjectID = "lT8-1P-Q3F"; */
+"lT8-1P-Q3F.headerTitle" = "kod kreskowy";
+
+/* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "mSi-7v-c1e"; */
+"mSi-7v-c1e.title" = "Plecy";
+
+/* Class = "UITextField"; placeholder = "Input card name"; ObjectID = "n0Q-wH-Dq3"; */
+"n0Q-wH-Dq3.placeholder" = "Nazwa karty wejściowej";
+
+/* Class = "UIBarButtonItem"; title = "Sort"; ObjectID = "rrg-aV-Ec6"; */
+"rrg-aV-Ec6.title" = "Sortować";
+
+/* Class = "UINavigationItem"; title = "CardList"; ObjectID = "uhI-pV-ZW0"; */
+"uhI-pV-ZW0.title" = "CardList";
+
+/* Class = "UILabel"; text = "Date:"; ObjectID = "uiI-3f-XNB"; */
+"uiI-3f-XNB.text" = "Data:";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "v95-ak-tr6"; */
+"v95-ak-tr6.title" = "Pozycja";
+
+/* Class = "UITableViewSection"; headerTitle = "Title"; ObjectID = "vqK-7X-Sil"; */
+"vqK-7X-Sil.headerTitle" = "Tytuł";
+
+/* Class = "UILabel"; text = "+"; ObjectID = "xJ7-kt-QQF"; */
+"xJ7-kt-QQF.text" = "+";
+
+/* Class = "UITableViewSection"; headerTitle = "Front Image"; ObjectID = "yf5-9W-HJa"; */
+"yf5-9W-HJa.headerTitle" = "Obraz z przodu";
+
+/* Class = "UILabel"; text = "Change Password"; ObjectID = "WW8-HG-FCj"; */
+"WW8-HG-FCj.text" = "Zmień hasło";
+
+/* Class = "UITextField"; placeholder = "new password"; ObjectID = "EYy-CH-fPL"; */
+"EYy-CH-fPL.placeholder" = "nowe hasło";
+
+/* Class = "UITextField"; placeholder = "reteat new password"; ObjectID = "bmw-Wf-x0z"; */
+"bmw-Wf-x0z.placeholder" = "powtórz hasło";
+
+/* Class = "UITextField"; placeholder = "old password"; ObjectID = "v4Y-AA-s7s"; */
+"v4Y-AA-s7s.placeholder" = "stare hasło";
+
+/* Class = "UIButton"; normalTitle = "Change"; ObjectID = "6xv-Ee-Rhp"; */
+"6xv-Ee-Rhp.normalTitle" = "zmienić";

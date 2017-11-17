@@ -22,6 +22,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>for creating photo or scan barcode for app </string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>for saving photo</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>for choosing photo for app</string>
 	<key>UILaunchStoryboardName</key>
@@ -32,9 +34,20 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIStatusBarHidden</key>
+	<false/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Add new card</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>typeAddCard</string>
+		</dict>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

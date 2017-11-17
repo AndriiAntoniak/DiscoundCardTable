@@ -43,6 +43,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
     }
+    
+    
+    //func for 3DTouch short action
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        if shortcutItem.type == "typeAddCard"{
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let addEditVC = sb.instantiateViewController(withIdentifier: "addEDITcard") as! AddEditTableViewController
+            let root = UIApplication.shared.keyWindow?.rootViewController
+            
+            root?.present(addEditVC, animated: true, completion: {() -> Void in
+                completionHandler(true)
+            })
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
 
     // MARK: - Core Data stack
 

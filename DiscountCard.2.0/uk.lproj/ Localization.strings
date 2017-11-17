@@ -1,0 +1,11 @@
+/* 
+   Localization.strings
+  DiscountCard.2.0
+
+  Created by Andrii Antoniak on 11/15/17.
+  Copyright © 2017 Andrii Antoniak. All rights reserved.
+*/
+"restart" = "Додаток повинен бути закритий для того, щоб змінити мову";
+"restartTitle" = "Це є необхідним";
+"cancel" = "Відміна";
+"close" = "Закрити";
