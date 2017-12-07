@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController, UIPopoverPresentationControllerDelegate, ChangeThemeDelegate, ChangeLanguageDelegate{
+class SettingsViewController: UIViewController, UIPopoverPresentationControllerDelegate, ChangeThemeDelegate, ChangeLanguageDelegate, UITextFieldDelegate{
     
     
     @IBOutlet weak var oldPassword: UITextField?
@@ -89,6 +89,15 @@ class SettingsViewController: UIViewController, UIPopoverPresentationControllerD
         }
         
         
+        //
+        oldPassword?.delegate = self
+        
+        newPassword?.delegate = self
+        
+        repeatNewPassword?.delegate = self
+        //
+        
+        
         imageView.layer.cornerRadius = 30
         
         view.backgroundColor(theme: theme)
@@ -159,13 +168,8 @@ class SettingsViewController: UIViewController, UIPopoverPresentationControllerD
     }
     
     func installLanguage(newLanguage: String) {
-       
-        
         let defaults = UserDefaults.standard
         defaults.set(newLanguage,forKey: "currentLanguage")
-        
-        
-        
     }
     
     
@@ -177,7 +181,15 @@ class SettingsViewController: UIViewController, UIPopoverPresentationControllerD
         return UIModalPresentationStyle.none
     }
     
+   
     
+    
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     
     
   

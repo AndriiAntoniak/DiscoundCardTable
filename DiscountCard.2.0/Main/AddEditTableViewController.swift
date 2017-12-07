@@ -11,7 +11,7 @@ import RSBarcodes_Swift
 import AVFoundation
 
 class AddEditTableViewController: UITableViewController, UIImagePickerControllerDelegate ,
-UINavigationControllerDelegate,ScannerResultDelegate, CropImageDelegate, UITextFieldDelegate, UITextViewDelegate{
+UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate,ScannerResultDelegate, CropImageDelegate{
    
     
     
