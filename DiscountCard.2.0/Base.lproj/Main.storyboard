@@ -190,6 +190,9 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bgl-ho-T1j">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </scrollView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CropCardList" translatesAutoresizingMaskIntoConstraints="NO" id="mAk-Ic-Ube">
                                 <rect key="frame" x="54" y="86" width="267" height="267"/>
                             </imageView>
@@ -311,19 +314,23 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ZpJ-kz-0uN" firstAttribute="centerX" secondItem="4OR-c0-MqU" secondAttribute="centerX" id="11k-kb-5Zb"/>
+                            <constraint firstItem="ZpJ-kz-0uN" firstAttribute="centerX" secondItem="Bgl-ho-T1j" secondAttribute="centerX" id="11k-kb-5Zb"/>
+                            <constraint firstItem="Bgl-ho-T1j" firstAttribute="top" secondItem="3g4-gO-SI6" secondAttribute="bottom" id="23N-Il-8DE"/>
                             <constraint firstItem="3g4-gO-SI6" firstAttribute="trailing" secondItem="4OR-c0-MqU" secondAttribute="trailing" id="5T2-2U-Qoe"/>
                             <constraint firstItem="CgP-a5-6vl" firstAttribute="height" secondItem="v4Y-AA-s7s" secondAttribute="height" multiplier="3" id="5tg-5C-S2Z"/>
                             <constraint firstItem="CgP-a5-6vl" firstAttribute="leading" secondItem="EYy-CH-fPL" secondAttribute="trailing" constant="8" id="AZ9-Yq-YNy"/>
                             <constraint firstItem="3g4-gO-SI6" firstAttribute="leading" secondItem="4OR-c0-MqU" secondAttribute="leading" id="FmF-gk-vEn"/>
                             <constraint firstItem="ZpJ-kz-0uN" firstAttribute="top" secondItem="mAk-Ic-Ube" secondAttribute="bottom" constant="22" id="MAs-SN-adU"/>
                             <constraint firstItem="3g4-gO-SI6" firstAttribute="top" secondItem="4OR-c0-MqU" secondAttribute="top" id="MnZ-84-WEq"/>
-                            <constraint firstItem="mAk-Ic-Ube" firstAttribute="centerX" secondItem="4OR-c0-MqU" secondAttribute="centerX" id="RLT-Fk-0W2"/>
-                            <constraint firstItem="4OR-c0-MqU" firstAttribute="bottom" secondItem="CgP-a5-6vl" secondAttribute="bottom" constant="50" id="aLR-SN-gF1"/>
-                            <constraint firstItem="4OR-c0-MqU" firstAttribute="bottom" secondItem="ZpJ-kz-0uN" secondAttribute="bottom" constant="22" id="hg7-cv-IjH"/>
+                            <constraint firstItem="Bgl-ho-T1j" firstAttribute="bottom" secondItem="4OR-c0-MqU" secondAttribute="bottom" id="OLE-pH-67d"/>
+                            <constraint firstItem="mAk-Ic-Ube" firstAttribute="centerX" secondItem="Bgl-ho-T1j" secondAttribute="centerX" id="RLT-Fk-0W2"/>
+                            <constraint firstItem="Bgl-ho-T1j" firstAttribute="leading" secondItem="4OR-c0-MqU" secondAttribute="leading" id="SOX-wo-NrW"/>
+                            <constraint firstItem="Bgl-ho-T1j" firstAttribute="bottom" secondItem="CgP-a5-6vl" secondAttribute="bottom" constant="50" id="aLR-SN-gF1"/>
+                            <constraint firstItem="Bgl-ho-T1j" firstAttribute="bottom" secondItem="ZpJ-kz-0uN" secondAttribute="bottom" constant="22" id="hg7-cv-IjH"/>
                             <constraint firstItem="mAk-Ic-Ube" firstAttribute="width" secondItem="GGb-FG-Etg" secondAttribute="height" multiplier="0.4" id="nNP-0k-AIA"/>
+                            <constraint firstItem="Bgl-ho-T1j" firstAttribute="trailing" secondItem="4OR-c0-MqU" secondAttribute="trailing" id="omU-mb-sCS"/>
                             <constraint firstItem="mAk-Ic-Ube" firstAttribute="height" secondItem="GGb-FG-Etg" secondAttribute="height" multiplier="0.4" id="q9R-x9-CwX"/>
-                            <constraint firstItem="mAk-Ic-Ube" firstAttribute="top" secondItem="4OR-c0-MqU" secondAttribute="top" constant="66" id="qB5-z2-kbj"/>
+                            <constraint firstItem="mAk-Ic-Ube" firstAttribute="top" secondItem="Bgl-ho-T1j" secondAttribute="top" constant="22" id="qB5-z2-kbj"/>
                             <constraint firstItem="ZpJ-kz-0uN" firstAttribute="width" secondItem="GGb-FG-Etg" secondAttribute="width" multiplier="0.6" id="sAB-Yw-tVR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4OR-c0-MqU"/>
@@ -1282,7 +1289,7 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oS4-SF-F11">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oS4-SF-F11">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="39Z-Vo-Vg6" userLabel="Common View">
@@ -1485,8 +1492,8 @@
         <image name="sortItem" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="UJX-dj-9Zu"/>
-        <segue reference="8yc-hl-2hU"/>
+        <segue reference="7SI-ea-DD2"/>
+        <segue reference="qIj-a7-RvG"/>
         <segue reference="n1V-T9-pD0"/>
     </inferredMetricsTieBreakers>
 </document>
