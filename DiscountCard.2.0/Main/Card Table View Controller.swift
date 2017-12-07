@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CardTableViewController: UIViewController , UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating,UIPopoverPresentationControllerDelegate, CardSortDelegate{
+class CardTableViewController: UIViewController, CardSortDelegate{
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -78,10 +78,6 @@ class CardTableViewController: UIViewController , UITableViewDataSource, UITable
         }
     }
     
-    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        return UIModalPresentationStyle.none
-    }
-    
     @IBAction func updateTableView(_ sender: Any) {
         for filter in filterColorDictionary{
             filter.key.backgroundColor = UIColor.white
@@ -117,31 +113,6 @@ class CardTableViewController: UIViewController , UITableViewDataSource, UITable
         }
     }
     
-    // MARK: - UITableViewDataSource
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return discountCard.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let card = discountCard[indexPath.row]
-        print(indexPath.row)
-        let cell  = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! CardTableCell
-        cell.cardTitle?.text = card.title
-        cell.cardDate?.text = DateFormatter.localizedString(from: card.date! as Date , dateStyle: DateFormatter.Style.medium, timeStyle: DateFormatter.Style.none)
-        cell.colorFilter?.backgroundColor = installColorForFilter(card:card)
-        cell.backImage?.image = cardManager.loadImageFromPath(path:  card.backImage!)
-        if let _ = card.descriptionCard{
-            cell.cardDescription = card.descriptionCard
-        }else{
-            cell.cardDescription = ""
-        }
-        cell.frontImage?.image = cardManager.loadImageFromPath(path: card.frontImage!)
-        cell.frontImage?.layer.cornerRadius = 20
-        cell.frontImage?.clipsToBounds = true
-        return cell
-    }
-    
     //func for chossing color filter
     func installColorForFilter(card:Card)->UIColor{
         switch card.filterColor{
@@ -154,43 +125,6 @@ class CardTableViewController: UIViewController , UITableViewDataSource, UITable
         default:break
         }
         return UIColor.clear
-    }
-    
-    //MARK: Table view functions
-    
-    //func for select cell
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "fromCellToPhoto", sender: discountCard[indexPath.row])
-    }
-    
-    //func for swipe cell
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let delete = UIContextualAction(style: .normal, title: nil) { action, sourceView, completionHandler  in
-            
-            CardManager.deleteCard(card: self.discountCard[indexPath.row])
-            self.discountCard.remove(at: indexPath.row)
-            tableView.reloadData()
-            
-            completionHandler(true)
-        }
-        let share = UIContextualAction(style: .normal, title: nil) { action, sourceView, completionHandler  in
-            let activityVC = UIActivityViewController(activityItems: [self.cardManager.loadImageFromPath(path: self.discountCard[indexPath.row].frontImage!) ?? #imageLiteral(resourceName: "Flag_of_None"),self.cardManager.loadImageFromPath(path: self.discountCard[indexPath.row].backImage!) ?? #imageLiteral(resourceName: "Flag_of_None"),self.discountCard[indexPath.row].title!], applicationActivities: nil)
-            self.present(activityVC, animated: true, completion: nil)
-            completionHandler(true)
-        }
-        let edit = UIContextualAction(style: .normal, title: nil) { action, sourceView, completionHandler  in
-            self.performSegue(withIdentifier: "EditToCard", sender: self.discountCard[indexPath.row])
-            completionHandler(true)
-        }
-        edit.backgroundColor = installColorForFilter(card:discountCard[indexPath.row])
-        delete.backgroundColor = installColorForFilter(card:discountCard[indexPath.row])
-        share.backgroundColor = installColorForFilter(card:discountCard[indexPath.row])
-        delete.image = #imageLiteral(resourceName: "delete")
-        share.image = #imageLiteral(resourceName: "share")
-        edit.image = #imageLiteral(resourceName: "edit")
-        let config = UISwipeActionsConfiguration(actions: [edit,share,delete])
-        config.performsFirstActionWithFullSwipe = false
-        return config
     }
     
     //MARK: color filter
@@ -225,26 +159,6 @@ class CardTableViewController: UIViewController , UITableViewDataSource, UITable
         filterColorDictionary[greenColorFilter] = "Green"
         filterColorDictionary[blueColorFilter] = "Blue"
         filterColorDictionary[violetColorFilter] = "Violet"
-    }
-    
-    //MARK: Searching
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        
-        if searchController.searchBar.text! == "" {
-            discountCard = cardManager.returnCard()
-            filterCardByColor()
-            tableView.reloadData()
-        }else{
-            searchCardByTitle(text: searchController.searchBar.text!)
-        }
-    }
-    
-    func searchCardByTitle(text: String) {
-        discountCard = filterCard.filter( { (this)-> Bool in
-            return (this.title?.lowercased().contains(text.lowercased()))!
-        })
-        tableView.reloadData()
     }
     
     //MARK: Sorting
