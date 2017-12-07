@@ -83,7 +83,7 @@ class AddEditTableViewController: UITableViewController, UITextFieldDelegate, UI
     //func for image picker controller
     func executeAddingImage() {
         let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
+        imagePickerController.delegate = self as UIImagePickerControllerDelegate & UINavigationControllerDelegate
         let addImage = UIAlertController(title: "Photo Source", message: "Choose a source of photo", preferredStyle: UIAlertControllerStyle.actionSheet)
         addImage.addAction(UIAlertAction(title: "Camera", style: .default, handler: {(action:UIAlertAction) in
             if(UIImagePickerController.isSourceTypeAvailable(.camera)) {
