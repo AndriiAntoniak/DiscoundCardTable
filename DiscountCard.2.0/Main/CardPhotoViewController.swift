@@ -28,7 +28,7 @@ class CardPhotoViewController: UIViewController , UIScrollViewDelegate {
         frontImage.image = cardMan.loadImageFromPath(path: (selectCard?.frontImage)!)
         backImage.image = cardMan.loadImageFromPath(path: (selectCard?.backImage)!)
         
-        if let _ = RSUnifiedCodeGenerator.shared.generateCode((selectCard?.barcode)!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue){
+        if let _ = selectCard?.barcode{
             barcodeImage?.image = RSUnifiedCodeGenerator.shared.generateCode((selectCard?.barcode)!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue)
         }else{
             barcodeImage?.image = #imageLiteral(resourceName: "Flag_of_None")
