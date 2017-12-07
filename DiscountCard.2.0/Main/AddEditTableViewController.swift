@@ -12,149 +12,6 @@ import AVFoundation
 
 class AddEditTableViewController: UITableViewController, UIImagePickerControllerDelegate ,
 UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate,ScannerResultDelegate, CropImageDelegate{
-   
-    
-    
-    
-    var boolEditValue = false
-    
-    private var cardMan = CardManager()
-    
-    var editCard : Card?
-    
-    var addCard : Card?
-    
-    public var whatIsImage : String?
-    
-    @IBOutlet weak var frontImageOutlet: UIImageView!
-    
-    @IBOutlet weak var backImageOutlet: UIImageView!
-    
-    @IBOutlet weak var titleFiled: UITextField!
-    
-    @IBOutlet weak var descriptionTextView: UITextView!
-    
-    @IBOutlet weak var barcodeImage: UIImageView!
-    
-    // outlet for button called _Create Barcode_
-    @IBOutlet weak var barcodeString: UIButton!
-    
-    
-    //func for adding front image
-    @IBAction func addFrontImage(_ sender: UIButton) {
-        whatIsImage = "front"
-        if frontImageOutlet.image != nil{
-        frontImageOutlet.backgroundColor = UIColor.white
-        frontImageOutlet.alpha = 1.0
-        }
-        executeAddingImage()
-    }
-    
-    //func for adding back image
-    @IBAction func addBackImage(_ sender: UIButton) {
-        whatIsImage = "back"
-        if backImageOutlet.image != nil{
-            backImageOutlet.backgroundColor = UIColor.white
-            backImageOutlet.alpha = 1.0
-        }
-        executeAddingImage()
-    }
-    
-    
-    //func for image picker controller
-    func executeAddingImage(){
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        let addImage = UIAlertController(title: "Photo Source", message: "Choose a source of photo", preferredStyle: UIAlertControllerStyle.actionSheet)
-        
-        addImage.addAction(UIAlertAction(title: "Camera", style: .default, handler: {(action:UIAlertAction) in
-            if(UIImagePickerController.isSourceTypeAvailable(.camera)){
-                imagePickerController.sourceType = .camera
-                self.present(imagePickerController, animated: true, completion: nil)
-            }else{
-                let closeAlertAction = UIAlertController(title: "Error", message: "Camera is not available", preferredStyle: .alert)
-                let alertAction = UIAlertAction(title: "Close", style: .cancel, handler: nil)
-                closeAlertAction.addAction(alertAction)
-                self.present(closeAlertAction, animated: true, completion: nil)
-            }
-        }))
-        
-        addImage.addAction(UIAlertAction(title: "Photo library", style: .default, handler: {(action:UIAlertAction) in
-            imagePickerController.sourceType = .photoLibrary
-            self.present(imagePickerController, animated: true, completion: nil)
-        }))
-        
-        addImage.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        self.present(addImage, animated: true, completion: nil)
-    }
-    
-   
-    //delegate for barcode
-    func returnStringBarcode(barcode str: String) {
-        self.barcodeString.setTitle(str , for: .normal)
-        self.barcodeImage.image = RSUnifiedCodeGenerator.shared.generateCode(self.barcodeString.currentTitle!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue)
-    }
-    
-    //Action for button called _Create Barcode_
-    @IBAction func buttonForCreatingBarcode(_ sender: UIButton) {
-        
-        let addBarcode = UIAlertController(title: "Creating barcode", message: "Choose a way for creating barcode", preferredStyle: UIAlertControllerStyle.actionSheet)
-
-        addBarcode.addAction(UIAlertAction(title: "Generate", style: .default, handler: {(action:UIAlertAction) in
-           let textFieldAlertController = UIAlertController(title: "Generate", message: "Please,enter barcode", preferredStyle: .alert)
-            
-            textFieldAlertController.addTextField{ (textField) in textField.text = "" }
-            
-            textFieldAlertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (alert:UIAlertAction) in
-                let textField = textFieldAlertController.textFields![0]
-                self.barcodeString.setTitle(textField.text , for: .normal)
-                self.barcodeImage.image = RSUnifiedCodeGenerator.shared.generateCode(self.barcodeString.currentTitle!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue)
-            }))
-           
-            let alertAction = UIAlertAction(title: "Close", style: .cancel, handler: nil)
-            
-            textFieldAlertController.addAction(alertAction)
-            
-            self.present(textFieldAlertController, animated: true, completion: nil)
- 
-        }))
-        
-        addBarcode.addAction(UIAlertAction(title: "Scan", style: .default, handler: {(action:UIAlertAction) in
-            if TARGET_OS_SIMULATOR == 0{
-                self.performSegue(withIdentifier: "fromAddToScanner", sender: nil)
-            }else{
-                let closeAlertAction = UIAlertController(title: "Error", message: "Camera is not available", preferredStyle: .alert)
-                let alertAction = UIAlertAction(title: "Close", style: .cancel, handler: nil)
-                closeAlertAction.addAction(alertAction)
-                self.present(closeAlertAction, animated: true, completion: nil)
-            }
-        }))
-        addBarcode.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        self.present(addBarcode, animated: true, completion: nil)
-    }
-    
-   
-    
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let identifaer = segue.identifier
-        if identifaer == "fromAddToScanner"{
-        let scann = segue.destination as? ScannerViewController
-         scann?.delegate = self
-        }else if identifaer == "fromAddToCrop"{
-            
-            let crop = segue.destination as? CropImageViewController
-            
-            crop?.image = sender as? UIImage
-            
-            let destination=segue.destination as! CropImageViewController
-            destination.delegate = self
-        }
-    }
-    
-    
-    //MARK: Choosing color filter, only one is possible !!!
     
     @IBOutlet weak var redColorFilter: UIButton!
     
@@ -168,82 +25,197 @@ UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate,ScannerR
     
     @IBOutlet weak var violetColorFilter: UIButton!
     
+    @IBOutlet weak var frontImageOutlet: UIImageView!
+    
+    @IBOutlet weak var backImageOutlet: UIImageView!
+    
+    @IBOutlet weak var titleFiled: UITextField!
+    
+    @IBOutlet weak var descriptionTextView: UITextView!
+    
+    @IBOutlet weak var barcodeImage: UIImageView!
+    
+    @IBOutlet weak var barcodeString: UIButton!
+    
     public var filterColorDictionary :[UIButton:String] = [:]
     
     var userDidChooseAnyColorFilter = false
     
+    public var whatIsImage : String?
+    
+    private var cardMan = CardManager()
+    
+    var editCard : Card?
+    
+    var addCard : Card?
+    
+    var boolEditValue = false
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.titleFiled.delegate = self
+        self.descriptionTextView.delegate = self
+        fillDictionary()
+        if editCard != nil {
+            userDidChooseAnyColorFilter = true
+            boolEditValue = true
+            insertCartValueWhichMustEditing()
+        }
+    }
+    
+    @IBAction func addFrontImage(_ sender: UIButton) {
+        whatIsImage = "front"
+        if frontImageOutlet.image != nil{
+            frontImageOutlet.backgroundColor = UIColor.white
+            frontImageOutlet.alpha = 1.0
+        }
+        executeAddingImage()
+    }
+    
+    @IBAction func addBackImage(_ sender: UIButton) {
+        whatIsImage = "back"
+        if backImageOutlet.image != nil {
+            backImageOutlet.backgroundColor = UIColor.white
+            backImageOutlet.alpha = 1.0
+        }
+        executeAddingImage()
+    }
+    
+    //func for image picker controller
+    func executeAddingImage() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        let addImage = UIAlertController(title: "Photo Source", message: "Choose a source of photo", preferredStyle: UIAlertControllerStyle.actionSheet)
+        addImage.addAction(UIAlertAction(title: "Camera", style: .default, handler: {(action:UIAlertAction) in
+            if(UIImagePickerController.isSourceTypeAvailable(.camera)) {
+                imagePickerController.sourceType = .camera
+                self.present(imagePickerController, animated: true, completion: nil)
+            }else {
+                let closeAlertAction = UIAlertController(title: "Error", message: "Camera is not available", preferredStyle: .alert)
+                let alertAction = UIAlertAction(title: "Close", style: .cancel, handler: nil)
+                closeAlertAction.addAction(alertAction)
+                self.present(closeAlertAction, animated: true, completion: nil)
+            }
+        }))
+        addImage.addAction(UIAlertAction(title: "Photo library", style: .default, handler: {(action:UIAlertAction) in
+            imagePickerController.sourceType = .photoLibrary
+            self.present(imagePickerController, animated: true, completion: nil)
+        }))
+        addImage.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(addImage, animated: true, completion: nil)
+    }
+    
+    //delegate for barcode
+    func returnStringBarcode(barcode str: String) {
+        self.barcodeString.setTitle(str , for: .normal)
+        self.barcodeImage.image = RSUnifiedCodeGenerator.shared.generateCode(self.barcodeString.currentTitle!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue)
+    }
+    
+    //Action for button called _Create Barcode_
+    @IBAction func buttonForCreatingBarcode(_ sender: UIButton) {
+        let addBarcode = UIAlertController(title: "Creating barcode", message: "Choose a way for creating barcode", preferredStyle: UIAlertControllerStyle.actionSheet)
+        addBarcode.addAction(UIAlertAction(title: "Generate", style: .default, handler: {(action:UIAlertAction) in
+            let textFieldAlertController = UIAlertController(title: "Generate", message: "Please,enter barcode", preferredStyle: .alert)
+            textFieldAlertController.addTextField{ (textField) in textField.text = "" }
+            textFieldAlertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (alert:UIAlertAction) in
+                let textField = textFieldAlertController.textFields![0]
+                self.barcodeString.setTitle(textField.text , for: .normal)
+                self.barcodeImage.image = RSUnifiedCodeGenerator.shared.generateCode(self.barcodeString.currentTitle!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue)
+            }))
+            let alertAction = UIAlertAction(title: "Close", style: .cancel, handler: nil)
+            textFieldAlertController.addAction(alertAction)
+            self.present(textFieldAlertController, animated: true, completion: nil)
+        }))
+        addBarcode.addAction(UIAlertAction(title: "Scan", style: .default, handler: {(action:UIAlertAction) in
+            if TARGET_OS_SIMULATOR == 0 {
+                self.performSegue(withIdentifier: "fromAddToScanner", sender: nil)
+            }else {
+                let closeAlertAction = UIAlertController(title: "Error", message: "Camera is not available", preferredStyle: .alert)
+                let alertAction = UIAlertAction(title: "Close", style: .cancel, handler: nil)
+                closeAlertAction.addAction(alertAction)
+                self.present(closeAlertAction, animated: true, completion: nil)
+            }
+        }))
+        addBarcode.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(addBarcode, animated: true, completion: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let identifaer = segue.identifier
+        if identifaer == "fromAddToScanner" {
+            let scann = segue.destination as? ScannerViewController
+            scann?.delegate = self
+        }else if identifaer == "fromAddToCrop" {
+            let crop = segue.destination as? CropImageViewController
+            crop?.image = sender as? UIImage
+            let destination=segue.destination as! CropImageViewController
+            destination.delegate = self
+        }
+    }
+    
+    //MARK: Choosing color filter, only one is possible !!!
+    
     @IBAction func choosingColorFilter(_ sender: UIButton) {
-        if userDidChooseAnyColorFilter == false{
-            for filter in filterColorDictionary{
+        if userDidChooseAnyColorFilter == false {
+            for filter in filterColorDictionary {
                 filter.key.backgroundColor = UIColor.white
                 filter.key.alpha = 1.0
             }
             userDidChooseAnyColorFilter = true
         }
-        if sender.backgroundColor == UIColor.white{
-            for filter in filterColorDictionary{
+        if sender.backgroundColor == UIColor.white {
+            for filter in filterColorDictionary {
                 filter.key.backgroundColor = UIColor.white
                 filter.key.alpha = 1.0
             }
             sender.backgroundColor = sender.borderColor
-            //
-        }else{
+        }else {
             sender.backgroundColor = UIColor.white
         }
-        
     }
     
-    
-    
     // MARK: Image picker controller delegate
+    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-        
-        if whatIsImage == "front"{
+        if whatIsImage == "front" {
             frontImageOutlet.image = image
         }else{
             backImageOutlet.image = image
         }
-        
         picker.dismiss(animated: true, completion: {() in
-            if self.whatIsImage == "front"{
+            if self.whatIsImage == "front" {
                 self.performSegue(withIdentifier: "fromAddToCrop", sender: self.frontImageOutlet.image)
-            }else{
+            }else {
                 self.performSegue(withIdentifier: "fromAddToCrop", sender: self.backImageOutlet.image)
             }
         })
     }
     
-    
-    
-    
-    //TODO: function for lighting
-    func lightUpGaps(){
-        if frontImageOutlet.image == nil{
+    func lightUpGaps() {
+        if frontImageOutlet.image == nil {
             frontImageOutlet.backgroundColor = UIColor.red
             frontImageOutlet.alpha = 0.7
         }
-        if backImageOutlet.image == nil{
+        if backImageOutlet.image == nil {
             backImageOutlet.backgroundColor = UIColor.red
             backImageOutlet.alpha = 0.7
         }
-        if titleFiled == nil || titleFiled.text == ""{
+        if titleFiled == nil || titleFiled.text == "" {
             titleFiled.backgroundColor = UIColor.red
             titleFiled.alpha = 0.7
         }
-        if !userDidChooseAnyColorFilter{
-            for filter in filterColorDictionary{
+        if !userDidChooseAnyColorFilter {
+            for filter in filterColorDictionary {
                 filter.key.backgroundColor = UIColor.red
                 filter.key.alpha = 0.7
             }
         }
     }
-    
-    
-   
     
     // exchange backgroundcolor
     @IBAction func textFieldDidEdit(_ sender: UITextField) {
@@ -251,13 +223,13 @@ UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate,ScannerR
         titleFiled.alpha = 1.0
     }
     
-    
     //MARK: Save changes
+    
     @IBAction func SaveCardButton(_ sender: UIButton) {
         
-        if frontImageOutlet.image != nil && backImageOutlet.image != nil && titleFiled.text != "" && userDidChooseAnyColorFilter{
+        if frontImageOutlet.image != nil && backImageOutlet.image != nil && titleFiled.text != "" && userDidChooseAnyColorFilter {
             
-            if boolEditValue{
+            if boolEditValue {
                 editExistCard()
             }else{
                 addNewCard()
@@ -272,8 +244,7 @@ UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate,ScannerR
         }
     }
     
-    
-    func fillDictionary(){
+    func fillDictionary() {
         filterColorDictionary[redColorFilter] = "Red"
         filterColorDictionary[orangeColorFilter] = "Orange"
         filterColorDictionary[yellowColorFilter] = "Yellow"
@@ -282,9 +253,8 @@ UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate,ScannerR
         filterColorDictionary[violetColorFilter] = "Violet"
     }
     
-
-    
     //MARK: Hide keyboard for textField and textView
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -295,73 +265,43 @@ UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate,ScannerR
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if text == "\n"{
+        if text == "\n" {
             textView.resignFirstResponder()
             return false
         }
         return true
     }
- 
     
-    
-
-    
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-        self.titleFiled.delegate = self
-        self.descriptionTextView.delegate = self
-        
-        fillDictionary()
-        
-        if editCard != nil{
-            userDidChooseAnyColorFilter = true
-            boolEditValue = true
-            insertCartValueWhichMustEditing()
-            
-        }
-    }
-    
-    
-    
-    //func for inserting edit card in table view
-    func insertCartValueWhichMustEditing(){
-        if editCard?.barcode != nil{
+    func insertCartValueWhichMustEditing() {
+        if editCard?.barcode != nil {
             barcodeString.setTitle(editCard?.barcode, for: .normal)
             if let _ = barcodeString.currentTitle {
                 barcodeImage.image = RSUnifiedCodeGenerator.shared.generateCode(barcodeString.currentTitle!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue)
             }
         }
-      
         titleFiled.text = editCard?.title
-        for filter in filterColorDictionary{
-            if filter.value == editCard?.filterColor{
+        for filter in filterColorDictionary {
+            if filter.value == editCard?.filterColor {
                 filter.key.backgroundColor = filter.key.borderColor
                 break
             }
         }
-        if let _ = editCard?.frontImage{
+        if let _ = editCard?.frontImage {
             frontImageOutlet.image = cardMan.loadImageFromPath(path: (editCard?.frontImage)!)
         }
-        if let _ = editCard?.backImage{
-             backImageOutlet.image = cardMan.loadImageFromPath(path: (editCard?.backImage)!)
+        if let _ = editCard?.backImage {
+            backImageOutlet.image = cardMan.loadImageFromPath(path: (editCard?.backImage)!)
         }
         descriptionTextView.text = editCard?.descriptionCard ?? nil
-     
     }
     
-  
-    //func for editing exist card
-    func editExistCard(){
+    func editExistCard() {
         userDidChooseAnyColorFilter = true
-            editCard?.barcode = barcodeString.currentTitle
+        editCard?.barcode = barcodeString.currentTitle
         editCard?.title = titleFiled.text
         fillDictionary()
-        for filter in filterColorDictionary{
-            if filter.key.backgroundColor != UIColor.white{
+        for filter in filterColorDictionary {
+            if filter.key.backgroundColor != UIColor.white {
                 editCard?.filterColor = filter.value
                 break
             }
@@ -371,13 +311,12 @@ UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate,ScannerR
         editCard?.descriptionCard = descriptionTextView.text
     }
     
-    //func for adding new card
-    func addNewCard(){
+    func addNewCard() {
         addCard = Card()
         addCard?.date = Date()
         addCard?.title = titleFiled.text
-        for filter in filterColorDictionary{
-            if filter.key.backgroundColor != UIColor.white{
+        for filter in filterColorDictionary {
+            if filter.key.backgroundColor != UIColor.white {
                 addCard?.filterColor = filter.value
                 break
             }
@@ -385,13 +324,12 @@ UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate,ScannerR
         addCard?.frontImage = cardMan.addToUrl(frontImageOutlet.image!)
         addCard?.backImage = cardMan.addToUrl(backImageOutlet.image!)
         
-        if barcodeString.currentTitle != "Create Barcode"{
+        if barcodeString.currentTitle != "Create Barcode" {
             addCard?.barcode = barcodeString.currentTitle
         }
         
         addCard?.descriptionCard = descriptionTextView.text
     }
-    
     
     // MARK: - Table view data source
     
@@ -405,17 +343,14 @@ UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate,ScannerR
         return 1
     }
     
-    
     func croppingImage(_ image: UIImage) {
-        if whatIsImage == "front"{
+        if whatIsImage == "front" {
             frontImageOutlet.image = image
         }else{
             backImageOutlet.image = image
         }
     }
-    
-
-}//End main class
+}
 
 
 

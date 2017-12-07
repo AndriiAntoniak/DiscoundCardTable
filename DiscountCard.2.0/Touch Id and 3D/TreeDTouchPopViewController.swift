@@ -10,21 +10,17 @@ import UIKit
 
 class TreeDTouchPopViewController: UIViewController {
 
-    
     @IBOutlet weak var barcodeImage: UIImageView!
     
     @IBOutlet weak var descriptionTextView: UITextView!
     
     var barcode : UIImage?
-    var descriptionCard : String?
     
+    var descriptionCard : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor(theme: theme)
-        
-        
         if let _ = barcode{
             barcodeImage?.image = barcode
             barcodeImage?.image = RotateImage.rotateImage(image: barcodeImage?.image)
@@ -38,17 +34,9 @@ class TreeDTouchPopViewController: UIViewController {
             descriptionTextView.text = ""
             descriptionTextView.isEditable = false
         }
-        
-        
         barcodeImage?.layer.cornerRadius = 20
         barcodeImage?.clipsToBounds = true
-        
         descriptionTextView?.layer.cornerRadius = 20
         descriptionTextView?.clipsToBounds = true
-        
-        
     }
-
-    
-
 }

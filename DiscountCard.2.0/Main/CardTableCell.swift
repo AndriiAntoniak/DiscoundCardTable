@@ -9,7 +9,6 @@
 import UIKit
 
 class CardTableCell: UITableViewCell {
-
     
     @IBOutlet weak var frontImage: UIImageView!
     

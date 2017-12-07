@@ -11,14 +11,11 @@ import CoreData
 
 class CardManager{
     
-    
-    
     private let entity = NSEntityDescription.entity(forEntityName: "Card", in: context)
     
     private static var persistentContainer: NSPersistentContainer {
         return (UIApplication.shared.delegate as! AppDelegate).persistentContainer
     }
-    
     
     private static var context: NSManagedObjectContext {
         return persistentContainer.viewContext
@@ -44,42 +41,34 @@ class CardManager{
         return discountCard
     }
     
-    
     static func deleteCard(card:Card){
         CardManager.context.delete(card)
         try? CardManager.context.save()
     }
     
-    
-        
-        func fetchData(filter: String?) -> [Card]{
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName :"Card")
-            if filter != nil && filter != "" {
-                fetchRequest.predicate = NSPredicate(format: "filter == %@", filter!)
-                var cardArray:[Card] = []
-                do{
-                    cardArray = (try CardManager.context.fetch(Card.fetchRequest()) as? [Card])!
-                } catch {
-                    print("Error fetch")
-                }
-                return cardArray
-            } else {
-                print("LIKE NIL FILTER")
-                do {
-                    var cardArray: [Card] = []
-                    cardArray = try CardManager.context.fetch(Card.fetchRequest()) as! [Card]
-                    return cardArray
-                } catch {
-                    let cardArray: [Card] = []
-                    return cardArray
-                }
-                
+    func fetchData(filter: String?) -> [Card]{
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName :"Card")
+        if filter != nil && filter != "" {
+            fetchRequest.predicate = NSPredicate(format: "filter == %@", filter!)
+            var cardArray:[Card] = []
+            do{
+                cardArray = (try CardManager.context.fetch(Card.fetchRequest()) as? [Card])!
+            } catch {
+                print("Error fetch")
             }
-            
-            
+            return cardArray
+        } else {
+            print("LIKE NIL FILTER")
+            do {
+                var cardArray: [Card] = []
+                cardArray = try CardManager.context.fetch(Card.fetchRequest()) as! [Card]
+                return cardArray
+            } catch {
+                let cardArray: [Card] = []
+                return cardArray
+            }
         }
-    
-    //TODO: Must be my photo saver
+    }
     
     func addToUrl (_ photo: UIImage )  -> String {
         let documentDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
@@ -91,8 +80,8 @@ class CardManager{
             print(error.localizedDescription)
         }
         return uuidStringforURL
-        
     }
+    
     func loadImageFromPath(path: String) -> UIImage? {
         let documentDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
         let imageURL = URL(fileURLWithPath: documentDirectoryPath.appendingPathComponent(path))
@@ -104,17 +93,5 @@ class CardManager{
         }
         return nil
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-}//END CardManager
+}
 

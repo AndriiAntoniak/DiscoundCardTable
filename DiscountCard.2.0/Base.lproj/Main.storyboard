@@ -295,7 +295,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="CgP-a5-6vl" userLabel="Image Stack View">
-                                <rect key="frame" x="308" y="541.5" width="31" height="75.5"/>
+                                <rect key="frame" x="308" y="541" width="31" height="76"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RIc-Kx-ahr" userLabel="old">
                                         <rect key="frame" x="0.0" y="0.0" width="31" height="25"/>
@@ -304,7 +304,7 @@
                                         <rect key="frame" x="0.0" y="25" width="31" height="25.5"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S7m-D7-piW" userLabel="repeat">
-                                        <rect key="frame" x="0.0" y="50.5" width="31" height="25"/>
+                                        <rect key="frame" x="0.0" y="50.5" width="31" height="25.5"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>

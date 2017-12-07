@@ -10,33 +10,35 @@ import UIKit
 
 class CardTableViewController: UIViewController , UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating,UIPopoverPresentationControllerDelegate, CardSortDelegate{
     
+    @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var settingsBurButtonItem: UIBarButtonItem!
     
-    //
+    @IBOutlet weak var redColorFilter: UIButton!
+    
+    @IBOutlet weak var orangeColorFilter: UIButton!
+    
+    @IBOutlet weak var yellowColorFilter: UIButton!
+    
+    @IBOutlet weak var greenColorFilter: UIButton!
+    
+    @IBOutlet weak var blueColorFilter: UIButton!
+    
+    @IBOutlet weak var violetColorFilter: UIButton!
+    
+    public var filterColorDictionary :[UIButton:String] = [:]
+    
     var quickActionBarcode : UIImage?
-    var quickActionDescription : String?
-    //
     
+    var quickActionDescription : String?
     
     var cardManager = CardManager()
     
     var discountCard : [Card] = []
+    
     var filterCard : [Card] = []
     
-    
-    @IBOutlet weak var tableView: UITableView!
-    
     let searchController = UISearchController(searchResultsController: nil)
-    
-    @IBOutlet weak var settingsBurButtonItem: UIBarButtonItem!
-    
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        discountCard = cardManager.returnCard()
-        filterCard = discountCard
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +57,12 @@ class CardTableViewController: UIViewController , UITableViewDataSource, UITable
         fillDictionary()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        discountCard = cardManager.returnCard()
+        filterCard = discountCard
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EditToCard"{
             let addEdit = segue.destination as! AddEditTableViewController
@@ -70,15 +78,10 @@ class CardTableViewController: UIViewController , UITableViewDataSource, UITable
         }
     }
     
-    //func for presentation as popOver
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.none
     }
     
-    
-    
-    
-    //func for updating table
     @IBAction func updateTableView(_ sender: Any) {
         for filter in filterColorDictionary{
             filter.key.backgroundColor = UIColor.white
@@ -114,14 +117,6 @@ class CardTableViewController: UIViewController , UITableViewDataSource, UITable
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -129,11 +124,9 @@ class CardTableViewController: UIViewController , UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let card = discountCard[indexPath.row]
         print(indexPath.row)
         let cell  = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! CardTableCell
-        
         cell.cardTitle?.text = card.title
         cell.cardDate?.text = DateFormatter.localizedString(from: card.date! as Date , dateStyle: DateFormatter.Style.medium, timeStyle: DateFormatter.Style.none)
         cell.colorFilter?.backgroundColor = installColorForFilter(card:card)
@@ -149,7 +142,6 @@ class CardTableViewController: UIViewController , UITableViewDataSource, UITable
         return cell
     }
     
-    
     //func for chossing color filter
     func installColorForFilter(card:Card)->UIColor{
         switch card.filterColor{
@@ -162,9 +154,7 @@ class CardTableViewController: UIViewController , UITableViewDataSource, UITable
         default:break
         }
         return UIColor.clear
-        
     }
-    
     
     //MARK: Table view functions
     
@@ -184,17 +174,12 @@ class CardTableViewController: UIViewController , UITableViewDataSource, UITable
             completionHandler(true)
         }
         let share = UIContextualAction(style: .normal, title: nil) { action, sourceView, completionHandler  in
-            
             let activityVC = UIActivityViewController(activityItems: [self.cardManager.loadImageFromPath(path: self.discountCard[indexPath.row].frontImage!) ?? #imageLiteral(resourceName: "Flag_of_None"),self.cardManager.loadImageFromPath(path: self.discountCard[indexPath.row].backImage!) ?? #imageLiteral(resourceName: "Flag_of_None"),self.discountCard[indexPath.row].title!], applicationActivities: nil)
             self.present(activityVC, animated: true, completion: nil)
-            
             completionHandler(true)
         }
-        
         let edit = UIContextualAction(style: .normal, title: nil) { action, sourceView, completionHandler  in
-            
             self.performSegue(withIdentifier: "EditToCard", sender: self.discountCard[indexPath.row])
-            
             completionHandler(true)
         }
         edit.backgroundColor = installColorForFilter(card:discountCard[indexPath.row])
@@ -203,30 +188,12 @@ class CardTableViewController: UIViewController , UITableViewDataSource, UITable
         delete.image = #imageLiteral(resourceName: "delete")
         share.image = #imageLiteral(resourceName: "share")
         edit.image = #imageLiteral(resourceName: "edit")
-        
         let config = UISwipeActionsConfiguration(actions: [edit,share,delete])
         config.performsFirstActionWithFullSwipe = false
-        
         return config
-        
     }
     
-    
-    
     //MARK: color filter
-    
-    @IBOutlet weak var redColorFilter: UIButton!
-    
-    @IBOutlet weak var orangeColorFilter: UIButton!
-    
-    @IBOutlet weak var yellowColorFilter: UIButton!
-    
-    @IBOutlet weak var greenColorFilter: UIButton!
-    
-    @IBOutlet weak var blueColorFilter: UIButton!
-    
-    @IBOutlet weak var violetColorFilter: UIButton!
-    
     
     @IBAction func colorFilterPressed(_ sender: UIButton) {
         sender.backgroundColor = sender.backgroundColor == UIColor.white ? sender.borderColor : UIColor.white
@@ -234,12 +201,10 @@ class CardTableViewController: UIViewController , UITableViewDataSource, UITable
         tableView.reloadData()
     }
     
-    
-    //function for color filter
-    func filterCardByColor(){
+    func filterCardByColor() {
         var choosenCard :[Card] = []
         var colorReview = false
-        for filter in filterColorDictionary{
+        for filter in filterColorDictionary {
             if filter.key.backgroundColor != UIColor.white{
                 colorReview = true
                 choosenCard += filterCard.filter( { (this)-> Bool in
@@ -253,9 +218,7 @@ class CardTableViewController: UIViewController , UITableViewDataSource, UITable
         }
     }
     
-    public var filterColorDictionary :[UIButton:String] = [:]
-    
-    func fillDictionary(){
+    func fillDictionary() {
         filterColorDictionary[redColorFilter] = "Red"
         filterColorDictionary[orangeColorFilter] = "Orange"
         filterColorDictionary[yellowColorFilter] = "Yellow"
@@ -277,18 +240,15 @@ class CardTableViewController: UIViewController , UITableViewDataSource, UITable
         }
     }
     
-    
-    func searchCardByTitle(text: String){
+    func searchCardByTitle(text: String) {
         discountCard = filterCard.filter( { (this)-> Bool in
             return (this.title?.lowercased().contains(text.lowercased()))!
         })
         tableView.reloadData()
     }
     
-    
     //MARK: Sorting
     
-    //function for sorting card by title and date
     func sortedCardList(by attribute: SortAttribute) {
         switch attribute{
         case .higherDate:
@@ -309,10 +269,4 @@ class CardTableViewController: UIViewController , UITableViewDataSource, UITable
             break
         }
     }
-    
-    
-    
-    
-    
-}//END VIEWCONTROLLER
-
+}

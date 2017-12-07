@@ -11,29 +11,29 @@ import UIKit
 class PopOverViewController: UIViewController {
     
     var delegate : CardSortDelegate?
-
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor(theme:theme)
+    }
+    
     @IBAction func fromHigherToLowerByDate(_ sender: UIButton) {
         delegate?.sortedCardList(by: SortAttribute.higherDate)
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func fromLowerToHigherByDate(_ sender: UIButton) {
-         delegate?.sortedCardList(by: SortAttribute.lowerDate)
+        delegate?.sortedCardList(by: SortAttribute.lowerDate)
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func fromHigherToLowerByTitle(_ sender: UIButton) {
-         delegate?.sortedCardList(by: SortAttribute.higherTitle)
+        delegate?.sortedCardList(by: SortAttribute.higherTitle)
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func fromLowerToHigherByTitle(_ sender: UIButton) {
-         delegate?.sortedCardList(by: SortAttribute.lowerTitle)
+        delegate?.sortedCardList(by: SortAttribute.lowerTitle)
         dismiss(animated: true, completion: nil)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor(theme:theme)
     }
 }

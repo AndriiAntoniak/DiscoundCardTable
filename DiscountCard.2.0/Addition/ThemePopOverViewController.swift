@@ -21,5 +21,4 @@ class ThemePopOverViewController: UIViewController {
         delegate?.installTheme(newTheme: .dark)
         self.dismiss(animated: true, completion: nil)
     }
-    
 }

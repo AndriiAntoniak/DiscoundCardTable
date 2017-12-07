@@ -25,8 +25,6 @@ public class Card: NSManagedObject {
     @NSManaged public var frontImage: String?
     @NSManaged public var title: String?
     
-    
-    
     convenience init() {
         self.init(context: CardManager.getContext())
     }
