@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate{
+class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     @IBOutlet weak var square: UIView!
     
@@ -24,10 +24,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         square.layer.borderWidth = 15
         let session = AVCaptureSession()
         let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
-        do{
+        do {
             let input = try AVCaptureDeviceInput(device: captureDevice!)
             session.addInput(input)
-        }catch{
+        } catch {
             print("ERROR")
         }
         let output = AVCaptureMetadataOutput()
@@ -42,35 +42,13 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     }
     
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        if metadataObjects.count != 0{
-            if let object = metadataObjects[0] as? AVMetadataMachineReadableCodeObject{
-                if object.type == AVMetadataObject.ObjectType.ean13{
+        if metadataObjects.count != 0 {
+            if let object = metadataObjects[0] as? AVMetadataMachineReadableCodeObject {
+                if object.type == AVMetadataObject.ObjectType.ean13 {
                     delegate?.returnStringBarcode(barcode: object.stringValue!)
-                    dismiss(animated: true, completion: {() -> Void in
-                        self.barcodeInfo(type: "ean13")
-                    })
-                }else if object.type == AVMetadataObject.ObjectType.code128{
-                    delegate?.returnStringBarcode(barcode: object.stringValue!)
-                    dismiss(animated: true, completion: {() -> Void in
-                        self.barcodeInfo(type: "code128")
-                    })
-                }else if object.type == AVMetadataObject.ObjectType.qr{
-                    delegate?.returnStringBarcode(barcode: object.stringValue!)
-                    dismiss(animated: true, completion: {() -> Void in
-                        self.barcodeInfo(type: "QR")
-                    })
-                }else if object.type == AVMetadataObject.ObjectType.ean8{
-                    delegate?.returnStringBarcode(barcode: object.stringValue!)
-                    dismiss(animated: true, completion: {() -> Void in
-                        self.barcodeInfo(type: "ean8")
-                    })
+                    dismiss(animated: true, completion: nil)
                 }
             }
         }
-    }
-    
-    func barcodeInfo(type barcode: String){
-        let alertInfo = UIAlertController(title: "Barcode type:", message: barcode, preferredStyle: .alert)
-        self.present(alertInfo, animated: true, completion: nil)
     }
 }

@@ -295,16 +295,16 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="CgP-a5-6vl" userLabel="Image Stack View">
-                                <rect key="frame" x="308" y="541" width="31" height="76"/>
+                                <rect key="frame" x="308" y="541" width="31.5" height="76"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RIc-Kx-ahr" userLabel="old">
-                                        <rect key="frame" x="0.0" y="0.0" width="31" height="25"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="31.5" height="25"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VjI-Qs-ev0" userLabel="new">
-                                        <rect key="frame" x="0.0" y="25" width="31" height="25.5"/>
+                                        <rect key="frame" x="0.0" y="25" width="31.5" height="25.5"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S7m-D7-piW" userLabel="repeat">
-                                        <rect key="frame" x="0.0" y="50.5" width="31" height="25.5"/>
+                                        <rect key="frame" x="0.0" y="50.5" width="31.5" height="25.5"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
@@ -315,7 +315,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ZpJ-kz-0uN" firstAttribute="centerX" secondItem="Bgl-ho-T1j" secondAttribute="centerX" id="11k-kb-5Zb"/>
-                            <constraint firstItem="Bgl-ho-T1j" firstAttribute="top" secondItem="3g4-gO-SI6" secondAttribute="bottom" id="23N-Il-8DE"/>
+                            <constraint firstItem="Bgl-ho-T1j" firstAttribute="top" secondItem="4OR-c0-MqU" secondAttribute="top" constant="44" id="23N-Il-8DE"/>
                             <constraint firstItem="3g4-gO-SI6" firstAttribute="trailing" secondItem="4OR-c0-MqU" secondAttribute="trailing" id="5T2-2U-Qoe"/>
                             <constraint firstItem="CgP-a5-6vl" firstAttribute="height" secondItem="v4Y-AA-s7s" secondAttribute="height" multiplier="3" id="5tg-5C-S2Z"/>
                             <constraint firstItem="CgP-a5-6vl" firstAttribute="leading" secondItem="EYy-CH-fPL" secondAttribute="trailing" constant="8" id="AZ9-Yq-YNy"/>
@@ -1493,7 +1493,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="7SI-ea-DD2"/>
-        <segue reference="qIj-a7-RvG"/>
+        <segue reference="8yc-hl-2hU"/>
         <segue reference="n1V-T9-pD0"/>
     </inferredMetricsTieBreakers>
 </document>
