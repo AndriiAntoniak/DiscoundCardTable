@@ -23,7 +23,10 @@ extension CardTableViewController: UITableViewDelegate {
             completionHandler(true)
         }
         let share = UIContextualAction(style: .normal, title: nil) { action, sourceView, completionHandler  in
-            let activityVC = UIActivityViewController(activityItems: [self.cardManager.loadImageFromPath(path: self.discountCard[indexPath.row].frontImage!) ?? #imageLiteral(resourceName: "Flag_of_None"),self.cardManager.loadImageFromPath(path: self.discountCard[indexPath.row].backImage!) ?? #imageLiteral(resourceName: "Flag_of_None"),self.discountCard[indexPath.row].title!], applicationActivities: nil)
+            let front = self.cardManager.loadImageFromPath(path: self.discountCard[indexPath.row].frontImage!) ?? #imageLiteral(resourceName: "Flag_of_None")
+            let back = self.cardManager.loadImageFromPath(path: self.discountCard[indexPath.row].backImage!) ?? #imageLiteral(resourceName: "Flag_of_None")
+            let title = self.discountCard[indexPath.row].title ?? ""
+            let activityVC = UIActivityViewController(activityItems: [front,back,title], applicationActivities: nil)
             self.present(activityVC, animated: true, completion: nil)
             completionHandler(true)
         }

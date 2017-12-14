@@ -85,18 +85,18 @@ class AddEditTableViewController: UITableViewController, UITextFieldDelegate, UI
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self as UIImagePickerControllerDelegate & UINavigationControllerDelegate
         let addImage = UIAlertController(title: "Photo Source", message: "Choose a source of photo", preferredStyle: UIAlertControllerStyle.actionSheet)
-        addImage.addAction(UIAlertAction(title: "Camera", style: .default, handler: {(action:UIAlertAction) in
+        addImage.addAction(UIAlertAction(title: "Camera", style: .default, handler: {(_:UIAlertAction) in
             if(UIImagePickerController.isSourceTypeAvailable(.camera)) {
                 imagePickerController.sourceType = .camera
                 self.present(imagePickerController, animated: true, completion: nil)
-            }else {
+            } else {
                 let closeAlertAction = UIAlertController(title: "Error", message: "Camera is not available", preferredStyle: .alert)
                 let alertAction = UIAlertAction(title: "Close", style: .cancel, handler: nil)
                 closeAlertAction.addAction(alertAction)
                 self.present(closeAlertAction, animated: true, completion: nil)
             }
         }))
-        addImage.addAction(UIAlertAction(title: "Photo library", style: .default, handler: {(action:UIAlertAction) in
+        addImage.addAction(UIAlertAction(title: "Photo library", style: .default, handler: {(_:UIAlertAction) in
             imagePickerController.sourceType = .photoLibrary
             self.present(imagePickerController, animated: true, completion: nil)
         }))
@@ -113,7 +113,7 @@ class AddEditTableViewController: UITableViewController, UITextFieldDelegate, UI
     //Action for button called _Create Barcode_
     @IBAction func buttonForCreatingBarcode(_ sender: UIButton) {
         let addBarcode = UIAlertController(title: "Creating barcode", message: "Choose a way for creating barcode", preferredStyle: UIAlertControllerStyle.actionSheet)
-        addBarcode.addAction(UIAlertAction(title: "Generate", style: .default, handler: {(action:UIAlertAction) in
+        addBarcode.addAction(UIAlertAction(title: "Generate", style: .default, handler: {(_:UIAlertAction) in
             let textFieldAlertController = UIAlertController(title: "Generate", message: "Please,enter barcode", preferredStyle: .alert)
             textFieldAlertController.addTextField{ (textField) in textField.text = "" }
             textFieldAlertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (alert:UIAlertAction) in
@@ -128,7 +128,7 @@ class AddEditTableViewController: UITableViewController, UITextFieldDelegate, UI
         addBarcode.addAction(UIAlertAction(title: "Scan", style: .default, handler: {(action:UIAlertAction) in
             if TARGET_OS_SIMULATOR == 0 {
                 self.performSegue(withIdentifier: "fromAddToScanner", sender: nil)
-            }else {
+            } else {
                 let closeAlertAction = UIAlertController(title: "Error", message: "Camera is not available", preferredStyle: .alert)
                 let alertAction = UIAlertAction(title: "Close", style: .cancel, handler: nil)
                 closeAlertAction.addAction(alertAction)
@@ -147,8 +147,8 @@ class AddEditTableViewController: UITableViewController, UITextFieldDelegate, UI
         }else if identifaer == "fromAddToCrop" {
             let crop = segue.destination as? CropImageViewController
             crop?.image = sender as? UIImage
-            let destination=segue.destination as! CropImageViewController
-            destination.delegate = self
+            let destination=segue.destination as? CropImageViewController
+            destination?.delegate = self
         }
     }
     
@@ -202,13 +202,13 @@ class AddEditTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     //MARK: Save changes
     
-    @IBAction func SaveCardButton(_ sender: UIButton) {
+    @IBAction func saveCardButton(_ sender: UIButton) {
         
         if frontImageOutlet.image != nil && backImageOutlet.image != nil && titleFiled.text != "" && userDidChooseAnyColorFilter {
             
             if boolEditValue {
                 editExistCard()
-            }else{
+            } else{
                 addNewCard()
             }
             performSegue(withIdentifier: "EditToCardTable", sender: nil)
@@ -316,7 +316,3 @@ class AddEditTableViewController: UITableViewController, UITextFieldDelegate, UI
         }
     }
 }
-
-
-
-

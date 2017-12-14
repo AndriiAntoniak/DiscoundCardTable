@@ -10,7 +10,6 @@
 import Foundation
 import CoreData
 
-
 public class Card: NSManagedObject {
     
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Card> {
@@ -28,5 +27,4 @@ public class Card: NSManagedObject {
     convenience init() {
         self.init(context: CardManager.getContext())
     }
-    
 }

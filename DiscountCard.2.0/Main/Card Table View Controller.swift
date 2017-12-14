@@ -26,7 +26,7 @@ class CardTableViewController: UIViewController, CardSortDelegate{
     
     @IBOutlet weak var violetColorFilter: UIButton!
     
-    public var filterColorDictionary :[UIButton:String] = [:]
+    public var filterColorDictionary : [UIButton:String] = [:]
     
     var quickActionBarcode : UIImage?
     
@@ -44,16 +44,13 @@ class CardTableViewController: UIViewController, CardSortDelegate{
         super.viewDidLoad()
         currentTheme()
         self.view.backgroundColor(theme:theme)
-        
         tableView.delegate = self
         tableView.dataSource = self
-        
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         tableView.tableHeaderView = searchController.searchBar
         definesPresentationContext = true
         searchController.searchBar.placeholder = "Search by title"
-        
         fillDictionary()
     }
     
@@ -64,13 +61,13 @@ class CardTableViewController: UIViewController, CardSortDelegate{
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "EditToCard"{
-            let addEdit = segue.destination as! AddEditTableViewController
-            addEdit.editCard = sender as? Card
-        }else if segue.identifier == "fromCellToPhoto"{
-            let scrollPhotoView = segue.destination as! CardPhotoViewController
-            scrollPhotoView.selectCard = sender as? Card
-        }else if segue.identifier == "FromTableToPopOver"{
+        if segue.identifier == "EditToCard" {
+            let addEdit = segue.destination as? AddEditTableViewController
+            addEdit?.editCard = sender as? Card
+        } else if segue.identifier == "fromCellToPhoto" {
+            let scrollPhotoView = segue.destination as? CardPhotoViewController
+            scrollPhotoView?.selectCard = sender as? Card
+        } else if segue.identifier == "FromTableToPopOver" {
             let popOver = segue.destination as? PopOverViewController
             popOver?.preferredContentSize = CGSize(width: view.frame.width / 5.0, height: view.frame.height / 4.0)
             popOver?.popoverPresentationController?.delegate = self
@@ -79,14 +76,13 @@ class CardTableViewController: UIViewController, CardSortDelegate{
     }
     
     @IBAction func updateTableView(_ sender: Any) {
-        for filter in filterColorDictionary{
+        for filter in filterColorDictionary {
             filter.key.backgroundColor = UIColor.white
         }
         discountCard = cardManager.returnCard()
         searchController.searchBar.text = ""
         searchController.isActive = false
         tableView.reloadData()
-        //
     }
     
     //func for using 3DTouch
@@ -95,34 +91,34 @@ class CardTableViewController: UIViewController, CardSortDelegate{
         switch traitCollection.forceTouchCapability {
         case .available:
             registerForPreviewing(with: self, sourceView: tableView)
-        default:break
+        default: break
         }
     }
     
     //func for installing theme
-    func currentTheme(){
+    func currentTheme() {
         let defaults = UserDefaults.standard
         let currentTheme = defaults.object(forKey: "currentTheme") as! String?
         
-        if let _ = currentTheme{
-            switch currentTheme!{
+        if let _ = currentTheme {
+            switch currentTheme! {
             case "light": theme = .light
             case "dark": theme = .dark
-            default:break
+            default: break
             }
         }
     }
     
     //func for chossing color filter
-    func installColorForFilter(card:Card)->UIColor{
-        switch card.filterColor{
+    func installColorForFilter(card:Card)->UIColor {
+        switch card.filterColor {
         case "Red"?: return UIColor(red: 255, green: 0, blue: 0, alpha: 1.0)
-        case "Orange"?:return UIColor.orange
-        case "Yellow"?:return UIColor(red: 255, green: 255, blue: 0, alpha: 1.0)
-        case "Green"?:return UIColor(red: 0, green: 255, blue: 0, alpha: 1.0)
-        case "Blue"?:return UIColor(red: 0, green: 0, blue: 255, alpha: 1.0)
+        case "Orange"?: return UIColor.orange
+        case "Yellow"?: return UIColor(red: 255, green: 255, blue: 0, alpha: 1.0)
+        case "Green"?: return UIColor(red: 0, green: 255, blue: 0, alpha: 1.0)
+        case "Blue"?: return UIColor(red: 0, green: 0, blue: 255, alpha: 1.0)
         case "Violet"?: return UIColor.purple
-        default:break
+        default: break
         }
         return UIColor.clear
     }
@@ -139,14 +135,14 @@ class CardTableViewController: UIViewController, CardSortDelegate{
         var choosenCard :[Card] = []
         var colorReview = false
         for filter in filterColorDictionary {
-            if filter.key.backgroundColor != UIColor.white{
+            if filter.key.backgroundColor != UIColor.white {
                 colorReview = true
                 choosenCard += filterCard.filter( { (this)-> Bool in
                     return (this.filterColor!.contains(filter.value))
                 })
                 discountCard = choosenCard
             }
-            if colorReview == false{
+            if colorReview == false {
                 discountCard = filterCard
             }
         }
@@ -164,7 +160,7 @@ class CardTableViewController: UIViewController, CardSortDelegate{
     //MARK: Sorting
     
     func sortedCardList(by attribute: SortAttribute) {
-        switch attribute{
+        switch attribute {
         case .higherDate:
             discountCard.sort(by: { $0.date! < $1.date!})
             tableView.reloadData()

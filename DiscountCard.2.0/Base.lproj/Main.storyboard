@@ -362,32 +362,32 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="XzH-kH-Uh3">
                                 <rect key="frame" x="0.0" y="0.0" width="100" height="300"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DSi-8T-OnW">
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DSi-8T-OnW">
                                         <rect key="frame" x="0.0" y="0.0" width="100" height="75"/>
                                         <state key="normal" title="Date ↓"/>
                                         <connections>
-                                            <action selector="fromHigherToLowerByDate:" destination="46S-TX-0Ap" eventType="touchUpInside" id="bJX-hM-rlO"/>
+                                            <action selector="sortBy:" destination="46S-TX-0Ap" eventType="touchUpInside" id="YGA-n2-33b"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FP7-3t-j89">
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FP7-3t-j89">
                                         <rect key="frame" x="0.0" y="75" width="100" height="75"/>
                                         <state key="normal" title="Date ↑"/>
                                         <connections>
-                                            <action selector="fromLowerToHigherByDate:" destination="46S-TX-0Ap" eventType="touchUpInside" id="VCH-y2-Lfa"/>
+                                            <action selector="sortBy:" destination="46S-TX-0Ap" eventType="touchUpInside" id="z9z-16-AAW"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cb6-Ww-c6D">
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cb6-Ww-c6D">
                                         <rect key="frame" x="0.0" y="150" width="100" height="75"/>
                                         <state key="normal" title="A-Z ↓"/>
                                         <connections>
-                                            <action selector="fromHigherToLowerByTitle:" destination="46S-TX-0Ap" eventType="touchUpInside" id="Kh4-qf-XpX"/>
+                                            <action selector="sortBy:" destination="46S-TX-0Ap" eventType="touchUpInside" id="wum-hY-jFM"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CzK-8T-XXm">
+                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CzK-8T-XXm">
                                         <rect key="frame" x="0.0" y="225" width="100" height="75"/>
                                         <state key="normal" title="A-Z ↑"/>
                                         <connections>
-                                            <action selector="fromLowerToHigherByTitle:" destination="46S-TX-0Ap" eventType="touchUpInside" id="pQI-he-zqT"/>
+                                            <action selector="sortBy:" destination="46S-TX-0Ap" eventType="touchUpInside" id="8Io-4E-hqo"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -406,7 +406,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SKF-3K-e6B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-686" y="126"/>
+            <point key="canvasLocation" x="-568" y="706"/>
         </scene>
         <!--Card Table View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -751,7 +751,7 @@
                                 <navigationItem title="Card" id="BF3-eP-9S0">
                                     <barButtonItem key="leftBarButtonItem" systemItem="save" id="1KS-pu-bo8">
                                         <connections>
-                                            <action selector="SaveCardButton:" destination="AJb-1X-rb4" id="c31-9e-m4o"/>
+                                            <action selector="saveCardButton:" destination="AJb-1X-rb4" id="c31-9e-m4o"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Qfb-5r-P19">

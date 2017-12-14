@@ -17,9 +17,25 @@ class PopOverViewController: UIViewController {
         self.view.backgroundColor(theme:theme)
     }
     
+ 
+    
+    @IBAction func sortBy(_ sender: UIButton) {
+        switch sender.tag {
+        case 1: delegate?.sortedCardList(by: SortAttribute.higherDate)
+        case 2: delegate?.sortedCardList(by: SortAttribute.lowerDate)
+        case 3: delegate?.sortedCardList(by: SortAttribute.higherTitle)
+        case 4: delegate?.sortedCardList(by: SortAttribute.lowerTitle)
+        default: break
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
+    
     @IBAction func fromHigherToLowerByDate(_ sender: UIButton) {
         delegate?.sortedCardList(by: SortAttribute.higherDate)
-        dismiss(animated: true, completion: nil)
+        
     }
     
     @IBAction func fromLowerToHigherByDate(_ sender: UIButton) {

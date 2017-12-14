@@ -12,6 +12,7 @@ import UIKit
 protocol ScannerResultDelegate{
     func returnStringBarcode(barcode str:String)
 }
+
 protocol CardSortDelegate{
     func sortedCardList(by atribute: SortAttribute)
 }
@@ -23,6 +24,7 @@ protocol CropImageDelegate {
 protocol ChangeThemeDelegate{
     func installTheme(newTheme:Theme)
 }
+
 protocol ChangeLanguageDelegate{
     func installLanguage(newLanguage:String)
 }

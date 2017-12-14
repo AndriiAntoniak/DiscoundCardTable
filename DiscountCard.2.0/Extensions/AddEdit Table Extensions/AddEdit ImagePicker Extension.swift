@@ -16,7 +16,7 @@ extension AddEditTableViewController: UIImagePickerControllerDelegate, UINavigat
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let image = info[UIImagePickerControllerOriginalImage] as? UIImage
         if whatIsImage == "front" {
             frontImageOutlet.image = image
         }else{
