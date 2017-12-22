@@ -23,7 +23,6 @@ extension CardTableViewController: UITableViewDataSource {
         cell?.cardTitle?.text = card.title
         cell?.cardDate?.text = DateFormatter.localizedString(from: card.date! as Date , dateStyle: DateFormatter.Style.medium, timeStyle: DateFormatter.Style.none)
         cell?.colorFilter?.backgroundColor = installColorForFilter(card:card)
-        cell?.backImage?.image = cardManager.loadImageFromPath(path:  card.backImage!)
         if let _ = card.descriptionCard{
             cell?.cardDescription = card.descriptionCard
         }else{

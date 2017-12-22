@@ -82,7 +82,23 @@ class CardTableViewController: UIViewController, CardSortDelegate{
         discountCard = cardManager.returnCard()
         searchController.searchBar.text = ""
         searchController.isActive = false
+        animateTable()
+    }
+    
+    func animateTable() {
         tableView.reloadData()
+        let cells = tableView.visibleCells
+        let tableViewHeight = tableView.bounds.size.height
+        for cell in cells {
+            cell.transform = CGAffineTransform(translationX: 0, y: tableViewHeight)
+        }
+        var delayCounter = 0.0
+        for cell in cells {
+            UIView.animate(withDuration: 1.75, delay: delayCounter * 0.05, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+                cell.transform = CGAffineTransform.identity
+            }, completion: nil)
+            delayCounter += 1
+        }
     }
     
     //func for using 3DTouch
@@ -128,7 +144,7 @@ class CardTableViewController: UIViewController, CardSortDelegate{
     @IBAction func colorFilterPressed(_ sender: UIButton) {
         sender.backgroundColor = sender.backgroundColor == UIColor.white ? sender.borderColor : UIColor.white
         filterCardByColor()
-        tableView.reloadData()
+        animateTable()
     }
     
     func filterCardByColor() {
@@ -163,19 +179,19 @@ class CardTableViewController: UIViewController, CardSortDelegate{
         switch attribute {
         case .higherDate:
             discountCard.sort(by: { $0.date! < $1.date!})
-            tableView.reloadData()
+            animateTable()
             break
         case .higherTitle:
             discountCard.sort(by: { $0.title!.lowercased() > $1.title!.lowercased()})
-            tableView.reloadData()
+            animateTable()
             break
         case .lowerDate:
             discountCard.sort(by: { $0.date! > $1.date!})
-            tableView.reloadData()
+            animateTable()
             break
         case .lowerTitle:
             discountCard.sort(by: { $0.title!.lowercased() < $1.title!.lowercased()})
-            tableView.reloadData()
+           animateTable()
             break
         }
     }

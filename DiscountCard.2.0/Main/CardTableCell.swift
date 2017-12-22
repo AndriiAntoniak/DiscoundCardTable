@@ -12,8 +12,6 @@ class CardTableCell: UITableViewCell {
     
     @IBOutlet weak var frontImage: UIImageView!
     
-    @IBOutlet weak var backImage: UIImageView!
-    
     @IBOutlet weak var colorFilter: UILabel!
     
     @IBOutlet weak var cardTitle: UILabel!
