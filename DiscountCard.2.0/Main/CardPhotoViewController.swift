@@ -51,7 +51,7 @@ class CardPhotoViewController: UIViewController , UIScrollViewDelegate {
     }
     
     @IBAction func backToCardTable(_ sender: Any) {
-        performSegue(withIdentifier: "fromPhotoToTable", sender: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func editSelectedCard(_ sender: Any) {

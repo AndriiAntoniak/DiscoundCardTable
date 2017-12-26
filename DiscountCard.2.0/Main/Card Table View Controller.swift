@@ -38,6 +38,8 @@ class CardTableViewController: UIViewController, CardSortDelegate{
     
     var filterCard : [Card] = []
     
+    var rectungle : CGRect!
+    
     let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
@@ -67,6 +69,7 @@ class CardTableViewController: UIViewController, CardSortDelegate{
         } else if segue.identifier == "fromCellToPhoto" {
             let scrollPhotoView = segue.destination as? CardPhotoViewController
             scrollPhotoView?.selectCard = sender as? Card
+            scrollPhotoView?.transitioningDelegate = self as UIViewControllerTransitioningDelegate
         } else if segue.identifier == "FromTableToPopOver" {
             let popOver = segue.destination as? PopOverViewController
             popOver?.preferredContentSize = CGSize(width: view.frame.width / 5.0, height: view.frame.height / 4.0)

@@ -12,6 +12,7 @@ import UIKit
 extension CardTableViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        rectungle = tableView.cellForRow(at: indexPath)?.frame
         performSegue(withIdentifier: "fromCellToPhoto", sender: discountCard[indexPath.row])
     }
 
