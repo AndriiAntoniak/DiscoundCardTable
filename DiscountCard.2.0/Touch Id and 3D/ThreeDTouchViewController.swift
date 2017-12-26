@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TreeDTouchViewController: UIViewController {
+class ThreeDTouchViewController: UIViewController {
     
     @IBOutlet weak var barcodeImageView: UIImageView?
     

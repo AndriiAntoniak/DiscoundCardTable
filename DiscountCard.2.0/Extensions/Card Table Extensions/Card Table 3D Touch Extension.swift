@@ -20,7 +20,7 @@ extension CardTableViewController: UIViewControllerPreviewingDelegate {
             let cell = tableView.cellForRow(at: indexPath) else {
                 return nil
         }
-        guard let TreeDVC = storyboard?.instantiateViewController(withIdentifier: "TreeDVC") as? TreeDTouchViewController else{
+        guard let TreeDVC = storyboard?.instantiateViewController(withIdentifier: "TreeDVC") as? ThreeDTouchViewController else{
             return nil
         }
         if let _ = RSUnifiedCodeGenerator.shared.generateCode(discountCard[indexPath.row].barcode!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue){
@@ -42,7 +42,7 @@ extension CardTableViewController: UIViewControllerPreviewingDelegate {
     
     //pop
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        if let treeDTouchPop = storyboard?.instantiateViewController(withIdentifier: "TreeDTouchPop") as? TreeDTouchPopViewController{
+        if let treeDTouchPop = storyboard?.instantiateViewController(withIdentifier: "TreeDTouchPop") as? ThreeDTouchPopViewController{
             treeDTouchPop.barcode = quickActionBarcode
             treeDTouchPop.descriptionCard = quickActionDescription
             show(treeDTouchPop, sender: self)

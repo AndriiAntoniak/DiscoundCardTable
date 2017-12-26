@@ -13,7 +13,7 @@
 		2B791CBE1FBCA304002F86AC /* LanguagePopOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B791CBD1FBCA304002F86AC /* LanguagePopOverViewController.swift */; };
 		2B795B721FB48329000B53EE /* Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B795B711FB48329000B53EE /* Delegates.swift */; };
 		2B7AEDA71FB4A4790027997C /* CropImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7AEDA61FB4A4790027997C /* CropImageViewController.swift */; };
-		2B857BD61FBDCD900087A73A /* TreeDTouchPopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B857BD51FBDCD900087A73A /* TreeDTouchPopViewController.swift */; };
+		2B857BD61FBDCD900087A73A /* ThreeDTouchPopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B857BD51FBDCD900087A73A /* ThreeDTouchPopViewController.swift */; };
 		2B857BD81FBDD0450087A73A /* Rotate Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B857BD71FBDD0450087A73A /* Rotate Image.swift */; };
 		2B874B331FB21321003DA942 /* CardPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B874B321FB21321003DA942 /* CardPhotoViewController.swift */; };
 		2B8BA3E41FD9BA3E00059DDB /* Card Table DataSource Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8BA3E31FD9BA3E00059DDB /* Card Table DataSource Extension.swift */; };
@@ -35,7 +35,7 @@
 		2BA0F7F21FBB61030013C2B5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA0F7F11FBB61030013C2B5 /* Constants.swift */; };
 		2BA0F7F41FBB6BD00013C2B5 /* ThemePopOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA0F7F31FBB6BD00013C2B5 /* ThemePopOverViewController.swift */; };
 		2BBFDE771FBB112D00A61913 /* Card Table 3D Touch Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBFDE761FBB112D00A61913 /* Card Table 3D Touch Extension.swift */; };
-		2BBFDE791FBB1AC600A61913 /* TreeDTouchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBFDE781FBB1AC600A61913 /* TreeDTouchViewController.swift */; };
+		2BBFDE791FBB1AC600A61913 /* ThreeDTouchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBFDE781FBB1AC600A61913 /* ThreeDTouchViewController.swift */; };
 		2BC5404E1FA9D7F60095649F /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC5404C1FA9D7F60095649F /* Card.swift */; };
 		2BDF81051FAB6A620057755D /* Button extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDF81041FAB6A620057755D /* Button extension.swift */; };
 		2BF3E8E91FB5F1EB003519A8 /* SortPopOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF3E8E81FB5F1EB003519A8 /* SortPopOverViewController.swift */; };
@@ -64,7 +64,7 @@
 		2B791CBD1FBCA304002F86AC /* LanguagePopOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePopOverViewController.swift; sourceTree = "<group>"; };
 		2B795B711FB48329000B53EE /* Delegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegates.swift; sourceTree = "<group>"; };
 		2B7AEDA61FB4A4790027997C /* CropImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropImageViewController.swift; sourceTree = "<group>"; };
-		2B857BD51FBDCD900087A73A /* TreeDTouchPopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDTouchPopViewController.swift; sourceTree = "<group>"; };
+		2B857BD51FBDCD900087A73A /* ThreeDTouchPopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDTouchPopViewController.swift; sourceTree = "<group>"; };
 		2B857BD71FBDD0450087A73A /* Rotate Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rotate Image.swift"; sourceTree = "<group>"; };
 		2B874B321FB21321003DA942 /* CardPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPhotoViewController.swift; sourceTree = "<group>"; };
 		2B8BA3E31FD9BA3E00059DDB /* Card Table DataSource Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card Table DataSource Extension.swift"; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 		2BA0F7F11FBB61030013C2B5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2BA0F7F31FBB6BD00013C2B5 /* ThemePopOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePopOverViewController.swift; sourceTree = "<group>"; };
 		2BBFDE761FBB112D00A61913 /* Card Table 3D Touch Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card Table 3D Touch Extension.swift"; sourceTree = "<group>"; };
-		2BBFDE781FBB1AC600A61913 /* TreeDTouchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDTouchViewController.swift; sourceTree = "<group>"; };
+		2BBFDE781FBB1AC600A61913 /* ThreeDTouchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDTouchViewController.swift; sourceTree = "<group>"; };
 		2BC5404C1FA9D7F60095649F /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		2BDF81041FAB6A620057755D /* Button extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button extension.swift"; sourceTree = "<group>"; };
 		2BF3E8E81FB5F1EB003519A8 /* SortPopOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortPopOverViewController.swift; sourceTree = "<group>"; };
@@ -184,9 +184,9 @@
 		2BED0BDD1FBEBE26004F0832 /* Touch Id and 3D */ = {
 			isa = PBXGroup;
 			children = (
-				2BBFDE781FBB1AC600A61913 /* TreeDTouchViewController.swift */,
+				2BBFDE781FBB1AC600A61913 /* ThreeDTouchViewController.swift */,
 				2BF3E8EC1FB6027C003519A8 /* TouchIDViewController.swift */,
-				2B857BD51FBDCD900087A73A /* TreeDTouchPopViewController.swift */,
+				2B857BD51FBDCD900087A73A /* ThreeDTouchPopViewController.swift */,
 			);
 			path = "Touch Id and 3D";
 			sourceTree = "<group>";
@@ -391,8 +391,8 @@
 				2B8BA3EA1FD9BB8100059DDB /* Card Table SearchResultsUpdating Extension.swift in Sources */,
 				2B8BA3ED1FD9BC0800059DDB /* AddEdit Table DataSource Extension.swift in Sources */,
 				2B19B3FE1FA8D22C00F21051 /* AddEditTableViewController.swift in Sources */,
-				2B857BD61FBDCD900087A73A /* TreeDTouchPopViewController.swift in Sources */,
-				2BBFDE791FBB1AC600A61913 /* TreeDTouchViewController.swift in Sources */,
+				2B857BD61FBDCD900087A73A /* ThreeDTouchPopViewController.swift in Sources */,
+				2BBFDE791FBB1AC600A61913 /* ThreeDTouchViewController.swift in Sources */,
 				2BDF81051FAB6A620057755D /* Button extension.swift in Sources */,
 				2B50CD711FB4631E00C9A22B /* ScannerViewController.swift in Sources */,
 				2BA0F7F01FBB60F10013C2B5 /* SettingsViewController.swift in Sources */,
